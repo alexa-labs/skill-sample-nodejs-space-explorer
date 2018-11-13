@@ -1,4 +1,4 @@
-# Space Explorer Sample Skill
+# Skill Sample Nodejs Space Explorer
 
 <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/fact/header._TTH_.png" />
 
@@ -126,3 +126,7 @@ The data for this skill is self-contained for training purposes. This was done t
 ### Technical Documentation
 
 [https://developer.amazon.com/docs/alexa-presentation-language/apl-overview.html](https://developer.amazon.com/docs/alexa-presentation-language/apl-overview.html)
+
+## License
+
+This library is licensed under the Amazon Software License.
