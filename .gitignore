@@ -1,0 +1,6 @@
+.vscode
+.eslintrc.json
+.prettierrc
+*.zip
+packages/alexa-layouts-beta.json
+packages/alexa-style-beta-test.json

@@ -1,0 +1,516 @@
+{
+    "backgroundImage": "https://d1od0khoye9qi3.cloudfront.net/assets/bg_space.png",
+    "earth": {
+        "about": {
+            "description": "Our home planet is the third planet from the Sun, and the only place we know of so far that’s inhabited by living things. While Earth is only the fifth largest planet in the solar system, it is the only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "nitrogen",
+                "percentage": 78
+            },
+            {
+                "element": "oxygen",
+                "percentage": 20
+            },
+            {
+                "element": "argon",
+                "percentage": 1
+            },
+            {
+                "element": "other",
+                "percentage": 1
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_earth.png",
+        "color": "#2cbeff",
+        "day": 23.934,
+        "diameter": 7926,
+        "distance": 93000000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth.png",
+        "label": "Earth",
+        "lightTravel": 8,
+        "region": "inner",
+        "relativeScale": "90%",
+        "rings": false,
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "238,855 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/earth/moon.png",
+                    "label": "Moon",
+                    "scale": "100%",
+                    "simple": "the moon",
+                    "description": "The fifth largest moon in the solar system, Earth's Moon is the only place beyond Earth where humans have set foot. The brightest and largest object in our night sky, the Moon makes Earth a more livable planet by moderating our home planet's wobble on its axis, leading to a relatively stable climate. It also causes tides, creating a rhythm that has guided humans for thousands of years. The Moon was likely formed after a Mars-sized body collided with Earth.\nEarth's only natural satellite is simply called \"the Moon\" because people didn't know other moons existed until Galileo Galilei discovered four moons orbiting Jupiter in 1610."
+                }
+            ],
+            "total": 1
+        },
+        "simple": "earth",
+        "type": "terrestrial",
+        "uniqueFact": "Life",
+        "year": 365
+    },
+    "jupiter": {
+        "about": {
+            "description": "Jupiter is the fifth planet from our Sun and is, by far, the largest planet in the solar system – more than twice as massive as all the other planets combined. Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter’s iconic Great Red Spot is a giant storm bigger than Earth that has raged for hundreds of years.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "hydrogen",
+                "percentage": 75
+            },
+            {
+                "element": "helium",
+                "percentage": 24
+            },
+            {
+                "element": "other",
+                "percentage": "~1"
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_jupiter.png",
+        "color": "#cc8c4d",
+        "day": 9.92496,
+        "diameter": 88729,
+        "distance": 483600000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter.png",
+        "label": "Jupiter",
+        "lightTravel": 45,
+        "region": "outer",
+        "relativeScale": "90%",
+        "rings": "Juptier has a system of rings known as the rings of Jupiter or the Jovian ring system. It was the third ring system to be discovered in the Solar System, after those of Saturn and Uranus. The Jovian ring system is faint and consists mainly of dust. It has four main components: a thick inner torus of particles known as the 'halo ring'; a relatively bright, exceptionally thin 'main ring'; and two wide, thick and faint outer 'gossamer rings', named for the moons of whose material they are composed: Amalthea and Thebe. They have a diameter of roughly 113000 miles.",
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "261,802 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/jupiter/io.png",
+                    "label": "Io",
+                    "scale": "90%"
+                },
+                {
+                    "distance": "414,000 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/jupiter/europa.png",
+                    "label": "Europa",
+                    "scale": "70%"
+                },
+                {
+                    "distance": "665,000 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/jupiter/ganymede.png",
+                    "label": "Ganymede",
+                    "scale": "100%"
+                },
+                {
+                    "distance": "1,168,000 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/jupiter/callisto.png",
+                    "label": "Callisto",
+                    "scale": "80%"
+                }
+            ],
+            "total": 79
+        },
+        "simple": "jupiter",
+        "type": "gas giant",
+        "uniqueFact": "The Red Dot",
+        "year": 4333
+    },
+    "mars": {
+        "about": {
+            "description": "The fourth planet from the Sun, Mars is a dusty, cold, desert world with a very thin atmosphere. This dynamic planet has seasons, polar ice caps, extinct volcanoes, canyons and weather. Mars is one of the most explored bodies in our solar system, and it's the only planet where we've sent rovers to roam the alien landscape. NASA missions have found lots of evidence that Mars was much wetter and warmer, with a thicker atmosphere, billions of years ago.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "carbon dioxide",
+                "percentage": 95.9
+            },
+            {
+                "element": "nitrogen",
+                "percentage": 1.9
+            },
+            {
+                "element": "argon",
+                "percentage": 2
+            },
+            {
+                "element": "oxygen",
+                "percentage": "&lt;1"
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_mars.png",
+        "color": "#da4e20",
+        "day": 24.623,
+        "diameter": 4222,
+        "distance": 141200000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars.png",
+        "label": "Mars",
+        "lightTravel": 11.5,
+        "region": "inner",
+        "relativeScale": "60%",
+        "rings": false,
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "5,826 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/mars/phobos.png",
+                    "label": "Phobos",
+                    "scale": "100%"
+                },
+                {
+                    "distance": "14,576 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/mars/deimos.png",
+                    "label": "Deimos",
+                    "scale": "56%"
+                }
+            ],
+            "total": 2
+        },
+        "simple": "mars",
+        "type": "terrestrial",
+        "uniqueFact": "The Red Planet",
+        "year": 687
+    },
+    "mercury": {
+        "about": {
+            "description": "The smallest planet in our solar system and nearest to the Sun, Mercury is only slightly larger than Earth's Moon. From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as 11 times brighter. Mercury is the fastest planet, zipping around the Sun every 88 Earth days.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_mercury.png",
+        "color": "#7194b5",
+        "day": 1407.5,
+        "diameter": 3031,
+        "distance": 36000000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury.png",
+        "label": "Mercury",
+        "lightTravel": "3",
+        "region": "inner",
+        "relativeScale": "60%",
+        "rings": false,
+        "satellites": {
+            "interesting": [],
+            "total": 0
+        },
+        "simple": "mercury",
+        "type": "terrestrial",
+        "uniqueFact": "Orbit and Rotation",
+        "year": 88
+    },
+    "neptune": {
+        "about": {
+            "description": "Dark, cold and whipped by supersonic winds, ice giant Neptune is the eighth and most distant planet in our solar system. More than 30 times as far from the Sun as Earth, Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "hydrogen",
+                "percentage": 80
+            },
+            {
+                "element": "helium",
+                "percentage": 19
+            },
+            {
+                "element": "methane",
+                "percentage": 1.5
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_neptune.png",
+        "color": "#1782cb",
+        "day": 16.11,
+        "diameter": 30200,
+        "distance": 2794400000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune.png",
+        "label": "Neptune",
+        "lightTravel": 249,
+        "region": "outer",
+        "relativeScale": "32%",
+        "rings": "Neptune has a system that consists primarily of five principal rings. Much of Neptune's ring system is quite tenuous, faint and dusty, more closely resembling the rings of Jupiter, and are made of extremely dark material, likely organic compounds processed by radiation, similar to that found in the rings of Uranus. They extend to the orbit of Proteus, at about 57000 mile above the cloud tops.",
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "220,437 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/neptune/triton.png",
+                    "label": "Triton",
+                    "scale": "100%"
+                }
+            ],
+            "total": 14
+        },
+        "simple": "neptune",
+        "type": "ice giant",
+        "uniqueFact": "Winds",
+        "year": 60190
+    },
+    "pluto": {
+        "about": {
+            "description": "Pluto is a complex and mysterious world with mountains, valleys, plains, craters, and maybe glaciers. Discovered in 1930, Pluto was long considered our solar system's ninth planet. But after the discovery of similar intriguing worlds deeper in the distant Kuiper Belt, icy Pluto was reclassified as a dwarf planet.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "nitrogen",
+                "percentage": 99
+            },
+            {
+                "element": "methane",
+                "percentage": "&lt;1"
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_pluto.png",
+        "color": "#3F1E3E",
+        "day": 153,
+        "diameter": 1413,
+        "distance": 3674500000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto.png",
+        "label": "Pluto",
+        "lightTravel": 280,
+        "region": "none",
+        "relativeScale": "",
+        "rings": false,
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "10,896 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/pluto/charon.png",
+                    "label": "Charon",
+                    "scale": "100%"
+                }
+            ],
+            "total": 5
+        },
+        "simple": "pluto",
+        "type": "dwarf",
+        "uniqueFact": "Planet?",
+        "year": 90520
+    },
+    "saturn": {
+        "about": {
+            "description": "Saturn is the sixth planet from the Sun and the second largest planet in our solar system. Adorned with a dazzling system of icy rings, Saturn is unique among the planets. It is not the only planet to have rings, but none are as spectacular or as complex as Saturn's. Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "hydrogen",
+                "percentage": 93.2
+            },
+            {
+                "element": "helium",
+                "percentage": "~7"
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_saturn.png",
+        "color": "#dbbe90",
+        "day": 10.656,
+        "diameter": 74600,
+        "distance": 886700000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn.png",
+        "label": "Saturn",
+        "lightTravel": 84,
+        "region": "outer",
+        "relativeScale": "140%",
+        "rings": "Saturn has the most extensive ring system of any planet in the solar system.  The ring particles are made almost entirely of water ice, with a trace component of rocky material. Although reflection from the rings increases Saturn's brightness, they are not visible from Earth with unaided vision. In 1610, the year after Galileo Galilei turned a telescope to the sky, he became the first person to observe Saturn's rings, though he could not see them well enough to discern their true nature. The main rings extend around 50000 miles beyond Saturn's equator.",
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "147,909 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/saturn/enceladus.png",
+                    "label": "Enceladus",
+                    "scale": "50%"
+                },
+                {
+                    "distance": "759,232 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/saturn/titan.png",
+                    "label": "Titan",
+                    "scale": "100%"
+                }
+            ],
+            "total": 62
+        },
+        "simple": "saturn",
+        "type": "gas giant",
+        "uniqueFact": "Rings",
+        "year": 10755
+    },
+    "the sun": {
+        "about": {
+            "description": "The Sun is a yellow dwarf star, a hot ball of glowing gases at the heart of our solar system. Its gravity holds the solar system together, keeping everything – from the biggest planets to the smallest particles of debris – in its orbit. The connection and interactions between the Sun and Earth drive the seasons, ocean currents, weather, climate, radiation belts and auroras. Though it is special to us, there are billions of stars like our Sun scattered across the Milky Way galaxy.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/sun.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/sun_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/sun_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/sun_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "age": "4.5 billion years",
+        "atmosphere": [],
+        "atmosphereImage": "",
+        "color": "#FFD200",
+        "day": 0,
+        "diameter": 432168.6,
+        "distance": 0,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/sun.png",
+        "label": "Sun",
+        "lightTravel": 0,
+        "region": "none",
+        "relativeScale": "100%",
+        "rings": false,
+        "satellites": {
+            "interesting": [],
+            "total": 0
+        },
+        "simple": "the sun",
+        "type": "Yellow Dwarf",
+        "year": 0
+    },
+    "uranus": {
+        "about": {
+            "description": "The seventh planet from the Sun with the third largest diameter in our solar system, Uranus is very cold and windy. The ice giant is surrounded by 13 faint rings and 27 small moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin on its side, orbiting the Sun like a rolling ball.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "hydrogen",
+                "percentage": 83
+            },
+            {
+                "element": "helium",
+                "percentage": 15
+            },
+            {
+                "element": "methane",
+                "percentage": 2
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_uranus.png",
+        "color": "#9CFFFF",
+        "day": -17.23992,
+        "diameter": 32600,
+        "distance": 1784000000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus.png",
+        "label": "Uranus",
+        "lightTravel": 165,
+        "region": "outer",
+        "relativeScale": "32%",
+        "rings": "Uranus has a system of rings intermediate in complexity between the more extensive set around Saturn and the simpler systems around Jupiter and Neptune. The rings of Uranus were discovered on March 10, 1977, by James L. Elliot, Edward W. Dunham, and Jessica Mink. The majority of Uranus's rings are very dark, opaque and only a few kilometers wide. They are probably composed of water ice with the addition of some dark radiation-processed organics. They have a diameter of roughly 61000 miles.",
+        "satellites": {
+            "interesting": [
+                {
+                    "distance": "118,620 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/uranus/ariel.png",
+                    "label": "Ariel",
+                    "scale": "77%"
+                },
+                {
+                    "distance": "271,104 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/uranus/titania.png",
+                    "label": "Titania",
+                    "scale": "100%"
+                },
+                {
+                    "distance": "362,570 mi",
+                    "image": "https://d1od0khoye9qi3.cloudfront.net/assets/moons/uranus/oberon.png",
+                    "label": "Oberon",
+                    "scale": "100%"
+                }
+            ],
+            "total": 27
+        },
+        "simple": "uranus",
+        "type": "ice giant",
+        "uniqueFact": "Sideways",
+        "year": 30687
+    },
+    "venus": {
+        "about": {
+            "description": "Venus is the second planet from the Sun and our closest planetary neighbor. Similar in structure and size to Earth, Venus spins slowly in the opposite direction from most planets. Its thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system with surface temperatures hot enough to melt lead. Glimpses below the clouds reveal volcanoes and deformed mountains.",
+            "images": [
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus.png",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus_2.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus_3.jpg",
+                "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus_4.jpg"
+            ],
+            "source": "NASA"
+        },
+        "atmosphere": [
+            {
+                "element": "carbon dioxide",
+                "percentage": 96.5
+            },
+            {
+                "element": "nitrogen",
+                "percentage": 3.5
+            }
+        ],
+        "atmosphereImage": "https://d1od0khoye9qi3.cloudfront.net/assets/donuts/atmosphere_venus.png",
+        "color": "#ce8f20",
+        "day": -5832.4,
+        "diameter": 7521,
+        "distance": 67200000,
+        "image": "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus.png",
+        "label": "Venus",
+        "lightTravel": 6,
+        "region": "inner",
+        "relativeScale": "85%",
+        "rings": false,
+        "satellites": {
+            "interesting": [],
+            "total": 0
+        },
+        "simple": "venus",
+        "type": "terrestrial",
+        "uniqueFact": "Greenhouse Effect",
+        "year": 225
+    }
+}

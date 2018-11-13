@@ -1,0 +1,78 @@
+{
+    "type": "APL",
+    "version": "1.0.0",
+    "resources": [
+        {
+            "strings": {
+                "fontFamilyRomanSans": "amazon-ember-display"
+            }
+        },
+        {
+            "description": "sizing for non-tv devices",
+            "when": "${@viewportProfile != @tvLandscapeXLarge}",
+            "dimensions": {
+                "ordinalSize": "52dp",
+                "itemHeight": "107dp"
+            }
+        },
+        {
+            "description": "sizing for tv",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
+            "dimensions": {
+                "ordinalSize": "26dp",
+                "itemHeight": "54dp"
+            }
+        },
+        {
+            "description": "Size definitions for distance indicators on hub",
+            "dimensions": {
+                "indicatorSize": "28dp",
+                "indicatorStroke": "4dp",
+                "indicatorRadius": "14dp",
+                "indicatorSpacing": "20dp"
+            }
+        },
+        {
+            "description": "Size definitions for distance indicators on tv",
+            "when": "${@viewportProfile == @tvLandscapeXLarge}",
+            "dimensions": {
+                "indicatorSize": "21dp",
+                "indicatorStroke": "3dp",
+                "indicatorSpacing": "13dp"
+            }
+        },
+        {
+            "description": "Viewport Profile modifier for Alexa on Tablet Show mode",
+            "when": "${@viewportShape == @viewportShapeRectangle && @viewportOrientation == @viewportOrientationLandscape && @viewportSizeClass >= @viewportClassLargeSmall && @viewportDensity == @viewportDensityNormal}",
+            "strings": {
+                "viewportProfile": "@hubLandscapeLarge"
+            }
+        }
+    ],
+    "styles": {
+        "backgroundWithFocusPress": {
+            "values": [
+                {
+                    "backgroundColor": "transparent"
+                },
+                {
+                    "when": "${state.focused && !state.pressed && @viewportProfile != @hubRoundSmall}",
+                    "backgroundColor": "rgba(255, 255, 255, 0.1)"
+                },
+                {
+                    "when": "${state.pressed}",
+                    "backgroundColor": "rgba(255, 255, 255, 0.3)"
+                }
+            ]
+        },
+        "backgroundWithFocusNoPress": {
+            "extend": "backgroundWithFocusPress",
+            "values": [
+                {
+                    "when": "${state.pressed}",
+                    "backgroundColor": "rgba(255, 255, 255, 0.1)"
+                }
+            ]
+        }
+    }
+}

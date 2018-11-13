@@ -1,0 +1,17 @@
+{
+  "name": "DDG-HeroSkillJM",
+  "productName": "",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "repository": "",
+  "author": {
+    "name": "Mongan, Jon",
+    "email": "monganj@amazon.com",
+    "url": "null"
+  },
+  "dependencies": {
+    "ask-sdk-core": "^2.1.0-beta.4",
+    "ask-sdk-model": "^1.4.0-beta.1"
+  }
+}

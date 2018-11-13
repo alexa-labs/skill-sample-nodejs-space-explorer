@@ -1,0 +1,702 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "a.p.l.",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "what can i say",
+                        "what can i do",
+                        "help"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": [
+                        "go right",
+                        "scroll right"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": [
+                        "go up",
+                        "scroll down"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": [
+                        "go left",
+                        "scroll left"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": [
+                        "go down",
+                        "scroll up"
+                    ]
+                },
+                {
+                    "name": "HelloIntent",
+                    "slots": [],
+                    "samples": [
+                        "Hello"
+                    ]
+                },
+                {
+                    "name": "ExploreObject",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "{celestial_object}",
+                        "show me {celestial_object}",
+                        "visit {celestial_object}",
+                        "go to {celestial_object}",
+                        "lets explore {celestial_object}",
+                        "i wanna explore {celestial_object}",
+                        "i want to explore {celestial_object}",
+                        "take me to {celestial_object}",
+                        "let's go to {celestial_object}"
+                    ]
+                },
+                {
+                    "name": "ObjectComposition",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "atmosphere",
+                        "what's in {celestial_object} atmosphere",
+                        "what's in its atmosphere",
+                        "what is its atmosphere",
+                        "{show_tell} its atmosphere",
+                        "{show_tell} {celestial_object} atmosphere",
+                        "what is {celestial_object} atmosphere made of",
+                        "what is {celestial_object} atmosphere"
+                    ]
+                },
+                {
+                    "name": "ObjectSize",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "celestial_object_two",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "size_comparison",
+                            "type": "SizeComparison"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "size",
+                        "{show_tell} {celestial_object} size",
+                        "how small is {celestial_object} compared to {celestial_object_two}",
+                        "how big is {celestial_object} compared to {celestial_object_two}",
+                        "{show_tell} the size of it",
+                        "{show_tell} the size",
+                        "{show_tell} the size of {celestial_object}",
+                        "what's the size of {celestial_object} compared to {celestial_object_two}",
+                        "how much {size_comparison} than {celestial_object_two} is {celestial_object}",
+                        "how much {size_comparison} is {celestial_object_two}",
+                        "how much {size_comparison} than {celestial_object_two} is it",
+                        "how much {size_comparison} is {celestial_object} than {celestial_object_two}",
+                        "what are {celestial_object} dimensions",
+                        "how big is {celestial_object}",
+                        "what size is {celestial_object}",
+                        "what size is it",
+                        "what is it's dimensions",
+                        "how big is it"
+                    ]
+                },
+                {
+                    "name": "ObjectDistance",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "celestial_object_two",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "distance_comparison",
+                            "type": "DistanceComparison"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "distance",
+                        "{show_tell} {celestial_object} distance compared to {celestial_object_two}",
+                        "tell me more about {celestial_object} distance",
+                        "{show_tell} {celestial_object} distance",
+                        "how far away from {celestial_object} is {celestial_object_two}",
+                        "how much {distance_comparison} is {celestial_object} than {celestial_object_two}",
+                        "how much {distance_comparison} is {celestial_object}",
+                        "how far away is {celestial_object_two}",
+                        "how far from {celestial_object} is {celestial_object_two}",
+                        "how far from {celestial_object} is it",
+                        "how far away is it"
+                    ]
+                },
+                {
+                    "name": "RandomImage",
+                    "slots": [],
+                    "samples": [
+                        "show me the photo of the day",
+                        "show me a space photo",
+                        "show me a random photo",
+                        "show me a photo",
+                        "show me the image of the day",
+                        "show me a random space image",
+                        "show me a random image",
+                        "show me an image",
+                        "show me a space image"
+                    ]
+                },
+                {
+                    "name": "ObjectRings",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        }
+                    ],
+                    "samples": [
+                        "rings",
+                        "tell me about {celestial_object}  rings",
+                        "does {celestial_object} have rings",
+                        "does it have rings",
+                        "tell me about the rings"
+                    ]
+                },
+                {
+                    "name": "MoreInfo",
+                    "slots": [],
+                    "samples": [
+                        "tell me more",
+                        "tell me about it"
+                    ]
+                },
+                {
+                    "name": "SolarSystem",
+                    "slots": [],
+                    "samples": [
+                        "show me the solar system",
+                        "go to the solar system",
+                        "back to the solar system",
+                        "go back to the solar system",
+                        "take me to the solar system",
+                        "take me back to the solar system"
+                    ]
+                },
+                {
+                    "name": "GoBack",
+                    "slots": [],
+                    "samples": [
+                        "up",
+                        "back",
+                        "go back"
+                    ]
+                },
+                {
+                    "name": "ObjectSatellites",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "satellites",
+                            "type": "Satellite"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "{satellites}",
+                        "{show_tell} its {satellites}",
+                        "{show_tell} {celestial_object} {satellites}",
+                        "how many {satellites} does {celestial_object} have",
+                        "how many {satellites} does it have",
+                        "does it have any {satellites}",
+                        "does {celestial_object} have any {satellites}",
+                        "does {celestial_object} have {satellites}"
+                    ]
+                },
+                {
+                    "name": "ExploreSolarSystem",
+                    "slots": [],
+                    "samples": [
+                        "explore the solar system",
+                        "lets explore the solar system"
+                    ]
+                },
+                {
+                    "name": "ExploreZones",
+                    "slots": [
+                        {
+                            "name": "zone",
+                            "type": "SolarSystemZone"
+                        }
+                    ],
+                    "samples": [
+                        "{zone}",
+                        "show me the {zone}",
+                        "take me to the {zone}",
+                        "take me to {zone}",
+                        "explore {zone}",
+                        "go to {zone}"
+                    ]
+                },
+                {
+                    "name": "ObjectUnique",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        }
+                    ],
+                    "samples": [
+                        "tell me something interesting about {celestial_object}",
+                        "tell me something interesting about it",
+                        "what's special about {celestial_object}",
+                        "what's special about it",
+                        "tell me something unique about {celestial_object}",
+                        "tell me something unique"
+                    ]
+                },
+                {
+                    "name": "TestIntent",
+                    "slots": [],
+                    "samples": [
+                        "yes"
+                    ]
+                },
+                {
+                    "name": "ObjectAbout",
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects"
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "overview",
+                        "about",
+                        "{show_tell} an overview of {celestial_object}",
+                        "{show_tell} its overview",
+                        "give me an overview of it",
+                        "give me an overview of {celestial_object}",
+                        "{show_tell} {celestial_object}",
+                        "{show_tell} it"
+                    ]
+                },
+                {
+                    "name": "OrdinalIntent",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "go to number {number}",
+                        "go to {number}",
+                        "number {number}",
+                        "{number}"
+                    ]
+                },
+                {
+                    "name": "PlanetsIntent",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "does the solar system have {number} planets",
+                        "how many planets are in the solar system"
+                    ]
+                },
+                {
+                    "name": "PlutoIntent",
+                    "slots": [],
+                    "samples": [
+                        "what happened to pluto",
+                        "is pluto a planet"
+                    ]
+                },
+                {
+                    "name": "CometsIntent",
+                    "slots": [],
+                    "samples": [
+                        "tell me about comets",
+                        "what are comets"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "CelestialObjects",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "the sun"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "haley's comet"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pluto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "uranus"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "neptune"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "enceladus"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "titan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "saturn"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "jupiter"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mars"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "the asteroid belt"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "the space station"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "the I.S.S."
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "the moon"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "earth"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "venus"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mercury"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "SizeComparison",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "littler"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "larger"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "smaller"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bigger"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DistanceComparison",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "further away"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "father away"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "further"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "nearer"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "farther"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "closer"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "SolarSystemZone",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "outer planets"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "inner planets"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "outer solar system"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "inner solar system"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "outer"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "inner"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Satellite",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "satellites"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "satellite"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "moons"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "moon"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ShowTell",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "tell me more about"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tell me about"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tell me"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "show me"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "ExploreObject",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "celestial_object",
+                            "type": "CelestialObjects",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1227623170231.300273171740"
+                            }
+                        },
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "MoreInfo",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": []
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1227623170231.300273171740",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I didn't catch that. Can you repeat it?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "I'm sorry, what did you want to explore?"
+                    }
+                ]
+            }
+        ]
+    }
+}

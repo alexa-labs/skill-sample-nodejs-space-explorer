@@ -1,0 +1,1101 @@
+{
+  "type": "APL",
+  "version": "1.0.0",
+  "imports": [
+    {
+      "name": "alexa-styles",
+      "version": "1.0.0-beta"
+    },
+    {
+      "name": "alexa-layouts",
+      "version": "1.0.0-beta"
+    },
+    {
+      "name": "styles",
+      "version": "1.0.0",
+      "source": "https://d1od0khoye9qi3.cloudfront.net/apl/styles.json"
+    }
+  ],
+  "layouts": {
+    "ImageListItem": {
+      "parameters": ["distance"],
+      "item": {
+        "type": "TouchWrapper",
+        "width": "60vh",
+        "inheritParentState": true,
+        "onPress": [
+          {
+            "type": "SendEvent",
+            "arguments": ["exploreEvent", "${data.simple}"]
+          }
+        ],
+        "item": {
+          "type": "Frame",
+          "borderRadius": 10,
+          "style": "backgroundWithFocusPress",
+          "inheritParentState": true,
+          "item": [
+            {
+              "type": "Container",
+              "direction": "column",
+              "alignItems": "center",
+              "justifyContent": "center",
+              "paddingBottom": "5%",
+              "paddingTop": "5%",
+              "width": "100%",
+              "items": [
+                {
+                  "type": "Container",
+                  "direction": "row",
+                  "alignItems": "center",
+                  "height": "40vh",
+                  "item": {
+                    "type": "Image",
+                    "source": "${data.image}",
+                    "height": "${data.relativeScale}",
+                    "width": "100%",
+                    "scale": "best-fit"
+                  }
+                },
+                {
+                  "type": "Container",
+                  "direction": "column",
+                  "alignItems": "left",
+                  "height": "35%",
+                  "spacing": "5%",
+                  "alignSelf": "left",
+                  "width": "100%",
+                  "items": [
+                    {
+                      "type": "Text",
+                      "text": "<b>${ordinal}.</b> ${data.label}",
+                      "style": "textStyleCallout",
+                      "textAlign": "${distance ? 'left' : 'center'}",
+                      "maxLines": 1
+                    },
+                    {
+                      "when": "${distance}",
+                      "type": "Text",
+                      "text": "${'Distance from ' + planet}",
+                      "style": "textStyleLabel",
+                      "color": "grey",
+                      "maxLines": 1
+                    },
+                    {
+                      "when": "${distance}",
+                      "type": "Text",
+                      "text": "${data.distance}",
+                      "style": "textStyleDetail",
+                      "maxLines": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ImagePagerItem": {
+      "parameters": ["distance", "planet"],
+      "items": [
+        {
+          "type": "TouchWrapper",
+          "width": "100%",
+          "height": "100%",
+          "onPress": [
+            {
+              "type": "SendEvent",
+              "arguments": [
+                "exploreEvent",
+                "${planet ? planet.simple : data.simple}"
+              ]
+            }
+          ],
+          "item": {
+            "type": "Container",
+            "width": "100%",
+            "height": "100%",
+            "alignItems": "center",
+            "inheritParentState": false,
+            "items": [
+              {
+                "type": "Image",
+                "source": "${planet ? planet.image : data.image}",
+                "height": "100%",
+                "width": "100%",
+                "scale": "best-fit",
+                "position": "absolute"
+              },
+              {
+                "type": "Image",
+                "position": "absolute",
+                "source": "${distance ? 'https://d1od0khoye9qi3.cloudfront.net/assets/rook-full-scrim.png' : 'https://d1od0khoye9qi3.cloudfront.net/assets/rook-scrim.png'}",
+                "width": "100vw",
+                "height": "${distance ? '100vh' : '27vw'}",
+                "bottom": 0
+              },
+              {
+                "type": "Container",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "direction": "column",
+                "width": "100%",
+                "height": "100%",
+                "paddingTop": "${distance ? 0 : '80%'}",
+                "items": [
+                  {
+                    "type": "Text",
+                    "text": "${planet ? planet.label : data.label}",
+                    "textAlign": "${distance ? 'left' : 'center}",
+                    "style": "textStyleDisplay4",
+                    "maxLines": 1
+                  },
+                  {
+                    "when": "${distance}",
+                    "type": "Text",
+                    "text": "Distance from Planet",
+                    "style": "textStyleBody",
+                    "color": "grey",
+                    "maxLines": 1
+                  },
+                  {
+                    "when": "${distance}",
+                    "type": "Text",
+                    "text": "${planet ? planet.distance : data.distance}",
+                    "style": "textStyleHeadline",
+                    "maxLines": 1
+                  }
+                ]
+              },
+              {
+                "type": "Frame",
+                "inheritParentState": true,
+                "position": "absolute",
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0,
+                "style": "backgroundWithFocusPress"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "SolarSystemPlanet": {
+      "parameters": ["name", "scale", "width"],
+      "items": [
+        {
+          "type": "TouchWrapper",
+          "width": "${width ? width : '25%'}",
+          "height": "${width ? '75%' : '33%'}",
+          "onPress": [
+            {
+              "type": "SendEvent",
+              "arguments": ["exploreEvent", "${name}"]
+            }
+          ],
+          "item": {
+            "type": "Container",
+            "width": "100%",
+            "height": "100%",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "inheritParentState": true,
+            "items": [
+              {
+                "type": "Frame",
+                "inheritParentState": true,
+                "height": "100%",
+                "width": "100%",
+                "borderRadius": "10dp",
+                "style": "backgroundWithFocusPress",
+                "position": "absolute"
+              },
+              {
+                "type": "Image",
+                "source": "${data[name].image}",
+                "height": "${scale}",
+                "scale": "best-fit",
+                "width": "${width ? '100%' : '50%'}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "InnerSolarSystem": {
+      "parameters": ["data"],
+      "item": {
+        "type": "Container",
+        "width": "100%",
+        "height": "100%",
+        "direction": "row",
+        "alignItems": "center",
+        "justifyContent": "spaceBetween",
+        "inheritParentState": true,
+        "items": [
+          {
+            "type": "Frame",
+            "inheritParentState": true,
+            "height": "100%",
+            "width": "100%",
+            "borderRadius": "10dp",
+            "style": "backgroundWithFocusPress",
+            "position": "absolute"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "mercury",
+            "scale": "10%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "venus",
+            "scale": "30%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "earth",
+            "scale": "33%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "mars",
+            "scale": "14%"
+          }
+        ]
+      }
+    },
+    "OuterSolarSystem": {
+      "parameters": ["data"],
+      "item": {
+        "type": "Container",
+        "width": "100%",
+        "height": "100%",
+        "direction": "row",
+        "alignItems": "center",
+        "justifyContent": "spaceBetween",
+        "inheritParentState": true,
+        "items": [
+          {
+            "type": "Frame",
+            "inheritParentState": true,
+            "height": "100%",
+            "width": "100%",
+            "borderRadius": "10dp",
+            "style": "backgroundWithFocusPress",
+            "position": "absolute"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "jupiter",
+            "scale": "100%",
+            "width": "20%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "saturn",
+            "scale": "90%",
+            "width": "40%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "uranus",
+            "scale": "30%",
+            "width": "20%"
+          },
+          {
+            "type": "SolarSystemPlanet",
+            "name": "neptune",
+            "scale": "30%",
+            "width": "20%"
+          }
+        ]
+      }
+    },
+    "SolarSystem": {
+      "parameters": ["data"],
+      "resources": [],
+      "items": [
+        {
+          "type": "Container",
+          "direction": "column",
+          "height": "100%",
+          "width": "100%",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${data.backgroundImage}",
+              "width": "100%",
+              "height": "100%",
+              "position": "absolute",
+              "scale": "best-fill"
+            },
+            {
+              "type": "Image",
+              "source": "https://d1od0khoye9qi3.cloudfront.net/assets/sun_sliver.png",
+              "height": "100vh",
+              "width": "19vh",
+              "scale": "best-fill",
+              "position": "absolute",
+              "left": "-10vh",
+              "top": 0,
+              "align": "right"
+            },
+            {
+              "type": "AlexaHeader",
+              "headerTitle": "SOLAR SYSTEM"
+            },
+            {
+              "type": "Container",
+              "width": "100%",
+              "height": "65%",
+              "shrink": 1,
+              "direction": "row",
+              "alignItems": "center",
+              "justifyContent": "spaceBetween",
+              "inheritParentState": true,
+              "items": [
+                {
+                  "type": "TouchWrapper",
+                  "width": "5%",
+                  "height": "100%",
+                  "inheritParentState": true,
+                  "onPress": [
+                    {
+                      "type": "SendEvent",
+                      "arguments": ["exploreEvent", "the sun"]
+                    }
+                  ],
+                  "item": {
+                    "type": "Frame",
+                    "inheritParentState": true,
+                    "height": "100%",
+                    "width": "100%",
+                    "borderRadius": "10dp",
+                    "style": "backgroundWithFocusPress",
+                    "position": "absolute"
+                  }
+                },
+                {
+                  "when": "${@viewportProfile != @tvLandscapeXLarge}",
+                  "type": "TouchWrapper",
+                  "grow": 1,
+                  "shrink": 1,
+                  "width": "25%",
+                  "height": "100%",
+                  "paddingLeft": "2%",
+                  "paddingRight": "2%",
+                  "inheritParentState": true,
+                  "onPress": [
+                    {
+                      "type": "SendEvent",
+                      "arguments": ["exploreZoneEvent", "inner"]
+                    }
+                  ],
+                  "item": {
+                    "type": "InnerSolarSystem",
+                    "data": "${data}"
+                  }
+                },
+                {
+                  "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                  "type": "Container",
+                  "grow": 1,
+                  "shrink": 1,
+                  "width": "25%",
+                  "height": "100%",
+                  "paddingLeft": "2%",
+                  "paddingRight": "2%",
+                  "item": {
+                    "type": "InnerSolarSystem",
+                    "data": "${data}"
+                  }
+                },
+                {
+                  "when": "${@viewportProfile != @tvLandscapeXLarge}",
+                  "type": "TouchWrapper",
+                  "width": "75%",
+                  "height": "100%",
+                  "paddingLeft": "2%",
+                  "paddingRight": "2%",
+                  "onPress": [
+                    {
+                      "type": "SendEvent",
+                      "arguments": ["exploreZoneEvent", "outer"]
+                    }
+                  ],
+                  "item": {
+                    "type": "OuterSolarSystem",
+                    "data": "${data}"
+                  }
+                },
+                {
+                  "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                  "type": "Container",
+                  "width": "75%",
+                  "height": "100%",
+                  "paddingLeft": "2%",
+                  "paddingRight": "2%",
+                  "item": {
+                    "type": "OuterSolarSystem",
+                    "data": "${data}"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "AlexaFooter",
+              "hintText": ""
+            },
+            {
+              "type": "TouchWrapper",
+              "position": "absolute",
+              "right": "6%",
+              "bottom": "6%",
+
+              "onPress": {
+                "type": "SendEvent",
+                "arguments": ["imageEvent"]
+              },
+              "item": [
+                {
+                  "type": "Frame",
+                  "width": "100%",
+                  "height": "100%",
+                  "inheritParentState": true,
+                  "style": "backgroundWithFocusPress",
+                  "paddingTop": 10,
+                  "paddingRight": 10,
+                  "paddingBottom": 10,
+                  "paddingLeft": 10,
+                  "borderRadius": "10dp",
+                  "item": [
+                    {
+                      "type": "Image",
+                      "source": "https://d1od0khoye9qi3.cloudfront.net/photooftheday_icon.png",
+                      "width": "48dp",
+                      "height": "48dp",
+                      "scale": "best-fit"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "SolarSystemSmallRoundHub": {
+      "parameters": ["data"],
+      "items": [
+        {
+          "type": "Container",
+          "direction": "column",
+          "height": "100%",
+          "width": "100%",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${data.backgroundImage}",
+              "width": "100%",
+              "height": "100%",
+              "position": "absolute",
+              "scale": "best-fill"
+            },
+            {
+              "type": "Pager",
+              "height": "100%",
+              "width": "100%",
+              "items": [
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['the sun']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['mercury']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['venus']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['earth']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['mars']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['jupiter']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['saturn']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['uranus']}"
+                },
+                {
+                  "type": "ImagePagerItem",
+                  "planet": "${data['neptune']}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ZoneList": {
+      "parameters": [
+        "backgroundImage",
+        "title",
+        "logo",
+        "hintText",
+        "listData"
+      ],
+      "items": [
+        {
+          "when": "${@viewportProfile != @hubRoundSmall}",
+          "type": "Container",
+          "height": "100vh",
+          "width": "100vw",
+          "direction": "column",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${backgroundImage}",
+              "scale": "best-fill",
+              "width": "100vw",
+              "height": "100vh",
+              "position": "absolute"
+            },
+            {
+              "type": "AlexaHeader",
+              "headerTitle": "${title}",
+              "headerBackButton": 1,
+              "headerNavigationAction": "backEvent"
+            },
+            {
+              "type": "Sequence",
+              "scrollDirection": "horizontal",
+              "paddingLeft": "@marginLeft",
+              "paddingRight": "@marginRight",
+              "paddingTop": 0,
+              "paddingBottom": 0,
+              "data": "${listData}",
+              "inheritParentState": true,
+              "grow": 1,
+              "shrink": 1,
+              "numbered": true,
+              "width": "100%",
+              "item": {
+                "type": "ImageListItem"
+              }
+            },
+            {
+              "type": "AlexaFooter",
+              "hintText": "${hintText}"
+            }
+          ]
+        },
+        {
+          "when": "${@viewportProfile == @hubRoundSmall}",
+          "type": "Container",
+          "direction": "column",
+          "height": "100%",
+          "width": "100%",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${data.backgroundImage}",
+              "width": "100%",
+              "height": "100%",
+              "position": "absolute",
+              "scale": "best-fill"
+            },
+            {
+              "type": "Pager",
+              "height": "100%",
+              "width": "100%",
+              "item": {
+                "type": "ImagePagerItem"
+              },
+              "data": "${listData}"
+            }
+          ]
+        }
+      ]
+    },
+    "PlanetDetailsListItem": {
+      "parameters": ["text", "event", "ordinalNum", "planet"],
+      "items": [
+        {
+          "type": "TouchWrapper",
+          "separator": true,
+          "inheritParentState": true,
+          "onPress": [
+            {
+              "type": "SendEvent",
+              "arguments": ["${event}", "${planet}"]
+            }
+          ],
+          "item": [
+            {
+              "type": "Container",
+              "direction": "row",
+              "spacing": 0,
+              "height": "@itemHeight",
+              "width": "100%",
+              "alignItems": "center",
+              "inheritParentState": true,
+              "paddingLeft": 10,
+              "paddingRight": 10,
+              "items": [
+                {
+                  "type": "Frame",
+                  "inheritParentState": true,
+                  "position": "absolute",
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0,
+                  "borderRadius": 10,
+                  "style": "backgroundWithFocusPress"
+                },
+                {
+                  "type": "Frame",
+                  "style": "flip",
+                  "height": "@ordinalSize",
+                  "width": "@ordinalSize",
+                  "backgroundColor": "rgba(255, 255, 255, 0.2)",
+                  "borderRadius": "26dp",
+                  "directionb": "row",
+                  "alightItems": "center",
+                  "justifyContent": "center",
+                  "items": [
+                    {
+                      "type": "Text",
+                      "text": "${ordinalNum}",
+                      "style": "${@viewportProfile != @hubRoundSmall? 'textStyleDetail':'textStyleBody'}",
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                      "opacity": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "Text",
+                  "text": "${text}",
+                  "style": "${@viewportProfile == @tvLandscapeXLarge ? 'textStyleHeadline' : 'textStyleDisplay4'}",
+                  "inheritParentState": true,
+                  "color": "${state.focused ? 'red' : 'white'}",
+                  "spacing": "20dp"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "PlanetDetailsList": {
+      "parameters": ["planet"],
+      "items": [
+        {
+          "when": "${planet != 'the sun'}",
+          "type": "Sequence",
+          "width": "${@viewportProfile == @hubRoundSmall ? '100%' : '50vw'}",
+          "grow": 1,
+          "shrink": 1,
+          "height": "auto",
+          "numbered": true,
+          "items": [
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 1,
+              "text": "Overview",
+              "event": "aboutEvent"
+            },
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 2,
+              "text": "Size",
+              "event": "sizeEvent"
+            },
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 3,
+              "text": "Distance",
+              "event": "distanceEvent"
+            },
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 4,
+              "text": "Atmosphere",
+              "event": "compositionEvent"
+            },
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 5,
+              "text": "Moons",
+              "event": "satellitesEvent"
+            },
+            {
+              "when": "${@viewportProfile == @hubRoundSmall}",
+              "type": "Frame",
+              "height": 80,
+              "width": "100%"
+            }
+          ]
+        },
+        {
+          "when": "${planet === 'the sun'}",
+          "type": "Sequence",
+          "width": "${@viewportProfile == @hubRoundSmall ? '100%' : '50vw'}",
+          "height": "${@viewportProfile == @hubRoundSmall ? '100%' : 'auto'}",
+          "grow": 1,
+          "numbered": true,
+          "items": [
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 1,
+              "text": "Overview",
+              "event": "aboutEvent"
+            },
+            {
+              "type": "PlanetDetailsListItem",
+              "planet": "${planet}",
+              "ordinalNum": 2,
+              "text": "Size",
+              "event": "sizeEvent"
+            }
+          ]
+        }
+      ]
+    },
+    "MoonList": {
+      "parameters": [
+        "backgroundImage",
+        "logo",
+        "hintText",
+        "listData",
+        "planet"
+      ],
+      "items": [
+        {
+          "when": "${@viewportProfile == @hubRoundSmall}",
+          "type": "Container",
+          "width": "100%",
+          "height": "100%",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${backgroundImage}",
+              "width": "100%",
+              "height": "100%",
+              "position": "absolute",
+              "scale": "best-fill"
+            },
+            {
+              "when": "${listData.length != 0}",
+              "type": "Pager",
+              "data": "${listData}",
+              "items": [
+                {
+                  "type": "ImagePagerItem",
+                  "distance": true
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "position": "absolute",
+              "width": "100%",
+              "item": {
+                "type": "AlexaHeader",
+                "headerTitle": "MOONS",
+                "headerAttributionPrimacy": false
+              }
+            },
+            {
+              "when": "${listData.length == 0}",
+              "type": "Container",
+              "height": "100%",
+              "width": "100%",
+              "paddingLeft": "@marginLeft",
+              "paddingRight": "@marginRight",
+              "alignItems": "center",
+              "justifyContent": "center",
+              "items": [
+                {
+                  "type": "Text",
+                  "style": "textStyleDisplay3",
+                  "textAlign": "center",
+                  "text": "${planet + ' has no moons'}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": "${@viewportProfile != @hubRoundSmall}",
+          "type": "Container",
+          "height": "100%",
+          "width": "100%",
+          "justifyContent": "${listData.length == 0 ? 'spaceBetween' : 'start'}",
+          "direction": "column",
+          "items": [
+            {
+              "type": "Image",
+              "source": "${backgroundImage}",
+              "scale": "best-fill",
+              "width": "100vw",
+              "height": "100vh",
+              "position": "absolute"
+            },
+            {
+              "type": "AlexaHeader",
+              "headerTitle": "${String.toUpperCase(planet) + ' · MOONS'}",
+              "headerBackButton": 1,
+              "headerNavigationAction": "backEvent"
+            },
+            {
+              "when": "${listData.length != 0}",
+              "type": "Container",
+              "grow": 1,
+              "shrink": 1,
+              "paddingLeft": "@marginLeft",
+              "items": [
+                {
+                  "type": "Sequence",
+                  "height": "50%",
+                  "width": "100%",
+                  "shrink": 1,
+                  "grow": 1,
+                  "scrollDirection": "horizontal",
+                  "data": "${listData}",
+                  "grow": 1,
+                  "numbered": true,
+                  "item": {
+                    "type": "ImageListItem",
+                    "distance": true
+                  }
+                }
+              ]
+            },
+            {
+              "when": "${listData.length == 0}",
+              "type": "Text",
+              "style": "textStyleDisplay3",
+              "textAlign": "center",
+              "text": "${planet + ' has no moons'}"
+            },
+            {
+              "type": "AlexaFooter",
+              "hintText": "${hintText}"
+            }
+          ]
+        }
+      ]
+    },
+    "DistanceGraphic": {
+      "parameters": ["color", "name", "width", "active", "test"],
+      "items": [
+        {
+          "type": "TouchWrapper",
+          "width": "${width + '%'}",
+          "height": "@indicatorSize",
+          "spacing": "@indicatorSpacing",
+          "onPress": {
+            "type": "SendEvent",
+            "arguments": ["distanceEvent", "${name}"]
+          },
+          "items": [
+            {
+              "type": "Frame",
+              "width": "100%",
+              "height": "100%",
+              "borderRadius": "10dp",
+              "position": "absolute",
+              "inheritParentState": true,
+              "style": "backgroundWithFocusPress",
+              "item": {
+                "type": "Container",
+                "width": "100%",
+                "height": "100%",
+                "direction": "row",
+                "alignItems": "center",
+                "opacity": "${active ? 1 : 0.3}",
+                "items": [
+                  {
+                    "type": "Frame",
+                    "height": "@indicatorStroke",
+                    "grow": 1,
+                    "backgroundColor": "${color}"
+                  },
+                  {
+                    "type": "Frame",
+                    "height": "@indicatorSize",
+                    "width": "@indicatorSize",
+                    "borderRadius": "@indicatorRadius",
+                    "borderWidth": "@indicatorStroke",
+                    "borderColor": "${color}",
+                    "backgroundColor": "${active ? color : 'transparent'}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "PlanetSize": {
+      "parameters": ["planet", "color", "diameter"],
+      "items": {
+        "type": "Container",
+        "items": [
+          {
+            "type": "Container",
+            "direction": "row",
+            "alignItems": "center",
+            "items": [
+              {
+                "type": "Frame",
+                "width": 25,
+                "height": 25,
+                "backgroundColor": "${color}",
+                "borderRadius": 15
+              },
+              {
+                "type": "Text",
+                "spacing": 10,
+                "text": "${planet}'S DIAMETER",
+                "style": "textStyleLabel",
+                "color": "grey"
+              }
+            ]
+          },
+          {
+            "type": "Text",
+            "text": "${diameter}",
+            "style": "textStyleDisplay4",
+            "color": "white"
+          }
+        ]
+      }
+    },
+    "Element": {
+      "parameters": ["element", "notation", "title", "percentage", "color"],
+      "items": [
+        {
+          "when": "${@viewportProfile == @tvLandscapeXLarge}",
+          "type": "Container",
+          "direction": "row",
+          "justifyContent": "spaceBetween",
+          "alignItems": "center",
+          "width": "100%",
+          "separator": true,
+          "items": [
+            {
+              "type": "Container",
+              "direction": "row",
+              "alignItems": "center",
+              "justifyContent": "spaceBetween",
+              "items": [
+                {
+                  "type": "Frame",
+                  "width": "28dp",
+                  "height": "28dp",
+                  "borderRadius": "14dp",
+                  "backgroundColor": "${element == 'other' ? '#ffffff' : color}"
+                },
+                {
+                  "type": "Text",
+                  "style": "textStyleHeadline",
+                  "spacing": "20dp",
+                  "text": "${title}"
+                }
+              ]
+            },
+            {
+              "type": "Text",
+              "style": "textStyleHeadline",
+              "text": "${percentage + '%'}"
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "Container",
+              "width": "200dp",
+              "height": "200dp",
+              "alignItems": "center",
+              "justifyContent": "spaceAround",
+              "items": [
+                {
+                  "type": "Frame",
+                  "width": "100%",
+                  "height": "100%",
+                  "position": "absolute",
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0,
+                  "borderWidth": "2dp",
+                  "borderColor": "#FAFAFA",
+                  "backgroundColor": "black",
+                  "borderRadius": "8dp",
+                  "opacity": 0.4
+                },
+                {
+                  "when": "${element != 'other'}",
+                  "type": "Text",
+                  "style": "${@viewportProfile == @hubRoundSmall? 'textStyleDisplay3Alt' : 'textStyleDisplay4Alt' }",
+                  "color": "${color}",
+                  "text": "${notation}",
+                  "height": "120dp",
+                  "textAlignVertical": "center"
+                },
+                {
+                  "when": "${element == 'other'}",
+                  "type": "Image",
+                  "source": "https://d1od0khoye9qi3.cloudfront.net/Beaker.png",
+                  "width": "49dp",
+                  "height": "83dp",
+                  "scale": "best-fit"
+                },
+                {
+                  "type": "Text",
+                  "style": "textStyleDetail",
+                  "textAlign": "center",
+                  "text": "${title}"
+                }
+              ]
+            },
+            {
+              "type": "Text",
+              "style": "textStyleDisplay4",
+              "textAlign": "center",
+              "spacing": 8,
+              "text": "${percentage + '%'}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
