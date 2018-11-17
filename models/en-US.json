@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "a.p.l.",
+            "invocationName": "space explorer",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent",
@@ -111,7 +111,7 @@
                     ]
                 },
                 {
-                    "name": "ObjectComposition",
+                    "name": "ObjectAtmosphere",
                     "slots": [
                         {
                             "name": "celestial_object",
@@ -195,6 +195,8 @@
                         }
                     ],
                     "samples": [
+                        "how far away {celestial_object_two} is",
+                        "what is the distance between {celestial_object} and {celestial_object_two}",
                         "distance",
                         "{show_tell} {celestial_object} distance compared to {celestial_object_two}",
                         "tell me more about {celestial_object} distance",
@@ -210,8 +212,18 @@
                 },
                 {
                     "name": "RandomImage",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "cool",
+                            "type": "Cool"
+                        }
+                    ],
                     "samples": [
+                        "do you have any space images",
+                        "are there any space images",
+                        "do you have any space photos",
+                        "Are there any space photos",
+                        "show me something {cool}",
                         "show me the photo of the day",
                         "show me a space photo",
                         "show me a random photo",
@@ -407,8 +419,39 @@
                     "name": "CometsIntent",
                     "slots": [],
                     "samples": [
+                        "what comets are",
                         "tell me about comets",
                         "what are comets"
+                    ]
+                },
+                {
+                    "name": "OtherRegionIntent",
+                    "slots": [
+                        {
+                            "name": "showtell",
+                            "type": "ShowTell"
+                        },
+                        {
+                            "name": "other_region",
+                            "type": "OtherRegion"
+                        }
+                    ],
+                    "samples": [
+                        "{showtell} the {other_region}",
+                        "what is the {other_region}"
+                    ]
+                },
+                {
+                    "name": "TheMoonIntent",
+                    "slots": [
+                        {
+                            "name": "show_tell",
+                            "type": "ShowTell"
+                        }
+                    ],
+                    "samples": [
+                        "{show_tell} earth moon",
+                        "{show_tell} the moon"
                     ]
                 }
             ],
@@ -418,12 +461,7 @@
                     "values": [
                         {
                             "name": {
-                                "value": "the sun"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "haley's comet"
+                                "value": "sun"
                             }
                         },
                         {
@@ -443,16 +481,6 @@
                         },
                         {
                             "name": {
-                                "value": "enceladus"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "titan"
-                            }
-                        },
-                        {
-                            "name": {
                                 "value": "saturn"
                             }
                         },
@@ -464,26 +492,6 @@
                         {
                             "name": {
                                 "value": "mars"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "the asteroid belt"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "the space station"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "the I.S.S."
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "the moon"
                             }
                         },
                         {
@@ -644,6 +652,86 @@
                         {
                             "name": {
                                 "value": "show me"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "OtherRegion",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "asteroid belt"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "oort cloud"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kuiper belt"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Cool",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "swell"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "radical"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "badass"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "dope"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "fetch"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "neato"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "neat"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "interesting"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "awesome"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "rad"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cool"
                             }
                         }
                     ]

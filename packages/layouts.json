@@ -997,7 +997,7 @@
       }
     },
     "Element": {
-      "parameters": ["element", "notation", "title", "percentage", "color"],
+      "parameters": ["element", "notation", "title", "percentage", "color", "spacing"],
       "items": [
         {
           "when": "${@viewportProfile == @tvLandscapeXLarge}",

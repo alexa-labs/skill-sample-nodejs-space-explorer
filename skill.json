@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Space Explorer Sample",
+          "examplePhrases": [
+            "Alexa open hello world",
+            "Alexa tell hello world hello",
+            "Alexa ask hello world say hello"
+          ],
+          "name": "Space Explorer APL Sample Skill",
+          "description": "Build beautiful, funtional interfaces for your users. This sample skill contains best practices and examples of how to develop high-quality visual experiences using APL."
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom"
+        }
+      },
+      "interfaces": [
+        {
+            "type": "ALEXA_PRESENTATION_APL"
+        }
+      ]
+    },
+    "manifestVersion": "1.0"
+  }
+}
