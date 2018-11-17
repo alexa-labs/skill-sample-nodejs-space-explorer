@@ -28,8 +28,15 @@ module.exports = handlerInput => {
   attributes.location = 'solar system';
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(directive)
-    .speak('Heading to the solar system. Where would you like to explore next?')
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(directive)
+      .speak('Heading to the solar system. Where would you like to explore next?')
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak('Heading to the solar system. Where would you like to explore next?')
+      .reprompt('Where would you like to explore next?')
+      .getResponse();
+  }
 };

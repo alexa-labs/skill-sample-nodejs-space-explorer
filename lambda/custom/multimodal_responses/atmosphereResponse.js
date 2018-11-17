@@ -58,9 +58,15 @@ module.exports = (handlerInput, location, speak = true) => {
   if (comp.length === 0) {
     speech = `${location} has no atmosphere.`;
   }
-
-  return handlerInput.responseBuilder
-    .addDirective(CompositionDirective(location.toLowerCase(), comp))
-    .speak(speak && speech)
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(CompositionDirective(location.toLowerCase(), comp))
+      .speak(speak && speech)
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(speech)
+      .reprompt('What elese would you like to know?')
+      .getResponse();
+  }
 };

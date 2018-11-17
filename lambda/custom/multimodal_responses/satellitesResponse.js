@@ -47,8 +47,15 @@ module.exports = (handlerInput, location, speak = true) => {
 
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(SatellitesDirective(location.toLowerCase()))
-    .speak(speak && speech)
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(SatellitesDirective(location.toLowerCase()))
+      .speak(speak && speech)
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(speech)
+      .reprompt('ould you like to learn anything else?')
+      .getResponse();
+  }
 };

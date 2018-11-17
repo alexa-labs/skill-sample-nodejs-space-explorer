@@ -34,17 +34,21 @@ module.exports = handlerInput => {
 
   if (previous.length) {
     const loc = previous.pop();
+    let cleanedLoc = loc;
 
     switch (loc) {
       case 'apod':
         directive = karaoke(sA.imageResource);
+        cleanedLoc = 'your random space image';
         break;
       case 'solar system':
         directive = solarSystemDirective();
+        cleanedLoc = 'the solar system';
         break;
       case 'inner':
       case 'outer':
         directive = solarSystemZoneDirective(loc);
+        cleanedLoc = `the ${loc} solar system`;
         break;
       default:
         directive = planetDirective(loc);
@@ -55,8 +59,14 @@ module.exports = handlerInput => {
       previousLocation: previous,
       location: loc
     });
-
-    return handlerInput.responseBuilder.addDirective(directive).getResponse();
+    
+    if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+      return handlerInput.responseBuilder.addDirective(directive).getResponse();
+    } else {
+      return handlerInput.responseBuilder
+        .speak(`Okay. Heading back to ${cleanedLoc}.`)
+        .getResponse();
+    }
   }
   if (previous) {
     return handlerInput.responseBuilder
@@ -72,5 +82,11 @@ module.exports = handlerInput => {
     location: 'solar system'
   });
 
-  return handlerInput.responseBuilder.addDirective(solarSystemDirective()).getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder.addDirective(solarSystemDirective()).getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak('Okay. Heading back to the solar system.')
+      .getResponse();
+  }
 };

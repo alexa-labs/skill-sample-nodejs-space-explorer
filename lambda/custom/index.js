@@ -16,11 +16,11 @@
 const Alexa = require('ask-sdk-core');
 
 const {
-  ExploreSolarSystemHandler,
   LaunchRequestHandler,
   HelpRequestHandler,
   EventHandler,
   FallbackHandler,
+  CancelIntentHandler,
   ExploreZoneRequestHandler,
   ExploreObjectRequestHandler,
   ObjectAboutHandler,
@@ -52,11 +52,11 @@ const SessionEndedRequestHandler = {
 
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
-    ExploreSolarSystemHandler,
     LaunchRequestHandler,
     HelpRequestHandler,
     EventHandler,
     FallbackHandler,
+    CancelIntentHandler,
     ExploreZoneRequestHandler,
     ExploreObjectRequestHandler,
     ObjectAboutHandler,

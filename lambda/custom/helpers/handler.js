@@ -13,6 +13,8 @@
  * permissions and limitations under the License.
  */
 
+'use strict';
+
 // @params
 //    intent: String
 //    handle: Function<HandlerInput> : Response

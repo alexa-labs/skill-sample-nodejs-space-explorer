@@ -15,4 +15,5 @@
 
 'use strict';
 
-module.exports = 'https://d1od0khoye9qi3.cloudfront.net/';
+module.exports = 'https://s3-us-west-2.amazonaws.com/ddg-skill/';
+// module.exports = 'https://d1od0khoye9qi3.cloudfront.net/';

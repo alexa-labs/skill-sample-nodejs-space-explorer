@@ -1,14 +1,14 @@
 /*
  * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
  * 
- * Licensed under the Amazon Software License (the License).
+ * Licensed under the Amazon Software License (the "License").
  * You may not use this file except in compliance with the License.
  * A copy of the License is located at
  * 
  * http: //aws.amazon.com/asl/
  * 
- * or in the license file accompanying this file. This file is distributed
- * on an AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
@@ -67,36 +67,43 @@ const OtherRegionRequestHandler = Handler('OtherRegionIntent', handlerInput => {
 
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(
-      TranscriptDirective(
-        {
-          title: capitalize(slot),
-          image: data[slot].image,
-          source: 'NASA',
-          description: data[slot].description
-        },
-        'LEARN MORE'
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(
+        TranscriptDirective(
+          {
+            title: capitalize(slot),
+            image: data[slot].image,
+            source: 'NASA',
+            description: data[slot].description
+          },
+          'LEARN MORE'
+        )
       )
-    )
-    .addDirective({
-      type: 'Alexa.Presentation.APL.ExecuteCommands',
-      token: 'transcript_document',
-      commands: [
-        {
-          type: 'SpeakItem',
-          componentId: 'imageText',
-          highlightMode: 'line',
-          align: 'center'
-        },
-        {
-          type: 'Scroll',
-          componentId: 'scrollContainer',
-          distance: -10000
-        }
-      ]
-    })
-    .getResponse();
+      .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'transcript_document',
+        commands: [
+          {
+            type: 'SpeakItem',
+            componentId: 'imageText',
+            highlightMode: 'line',
+            align: 'center'
+          },
+          {
+            type: 'Scroll',
+            componentId: 'scrollContainer',
+            distance: -10000
+          }
+        ]
+      })
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(data[slot].description)
+      .reprompt('What else would you like to know?')
+      .getResponse();
+  }
 });
 
 module.exports = OtherRegionRequestHandler;

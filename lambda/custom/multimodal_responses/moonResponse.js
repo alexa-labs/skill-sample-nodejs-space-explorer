@@ -33,34 +33,41 @@ module.exports = (handlerInput, shouldSpeak = true) => {
   attributes.location = 'the moon';
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(
-      TranscriptDirective(
-        {
-          image: moon.image,
-          source: 'NASA',
-          title: moon.label,
-          description: moon.description
-        },
-        'EARTH · THE MOON'
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(
+        TranscriptDirective(
+          {
+            image: moon.image,
+            source: 'NASA',
+            title: moon.label,
+            description: moon.description
+          },
+          'EARTH · THE MOON'
+        )
       )
-    )
-    .addDirective({
-      type: 'Alexa.Presentation.APL.ExecuteCommands',
-      token: 'transcript_document',
-      commands: [
-        {
-          type: 'SpeakItem',
-          componentId: shouldSpeak ? 'imageText' : 'doNothing',
-          highlightMode: 'line',
-          align: 'center'
-        },
-        {
-          type: 'Scroll',
-          componentId: 'scrollContainer',
-          distance: -10000
-        }
-      ]
-    })
-    .getResponse();
+      .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'transcript_document',
+        commands: [
+          {
+            type: 'SpeakItem',
+            componentId: shouldSpeak ? 'imageText' : 'doNothing',
+            highlightMode: 'line',
+            align: 'center'
+          },
+          {
+            type: 'Scroll',
+            componentId: 'scrollContainer',
+            distance: -10000
+          }
+        ]
+      })
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(moon.description)
+      .reprompt('What elese would you like to know?')
+      .getResponse();
+  }
 };

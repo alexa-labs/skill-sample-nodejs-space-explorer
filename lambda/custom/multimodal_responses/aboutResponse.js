@@ -33,24 +33,31 @@ module.exports = (handlerInput, planet, speak = true) => {
   attributes.location = planet;
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(TranscriptDirective(about, `${planet.toUpperCase()} · OVERVIEW`))
-    .addDirective({
-      type: 'Alexa.Presentation.APL.ExecuteCommands',
-      token: 'transcript_document',
-      commands: [
-        {
-          type: 'SpeakItem',
-          componentId: speak ? 'imageText' : 'doNothing',
-          highlightMode: 'line',
-          align: 'center'
-        },
-        {
-          type: 'Scroll',
-          componentId: 'scrollContainer',
-          distance: -10000
-        }
-      ]
-    })
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(TranscriptDirective(about, `${planet.toUpperCase()} · OVERVIEW`))
+      .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'transcript_document',
+        commands: [
+          {
+            type: 'SpeakItem',
+            componentId: speak ? 'imageText' : 'doNothing',
+            highlightMode: 'line',
+            align: 'center'
+          },
+          {
+            type: 'Scroll',
+            componentId: 'scrollContainer',
+            distance: -10000
+          }
+        ]
+      })
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(about.description)
+      .reprompt('What else would you like to learn?')
+      .getResponse();
+  }
 };

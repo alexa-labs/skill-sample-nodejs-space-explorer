@@ -1041,10 +1041,11 @@
           "items": [
             {
               "type": "Container",
-              "width": "200dp",
-              "height": "200dp",
+              "width": "${@isHubLandscapeSmall ? '18vw' : '200dp'}",
+              "height": "${@isHubLandscapeSmall ? '18vw' : '200dp'}",
               "alignItems": "center",
               "justifyContent": "spaceAround",
+              "spacing": "${spacing}",
               "items": [
                 {
                   "type": "Frame",
@@ -1064,7 +1065,7 @@
                 {
                   "when": "${element != 'other'}",
                   "type": "Text",
-                  "style": "${@viewportProfile == @hubRoundSmall? 'textStyleDisplay3Alt' : 'textStyleDisplay4Alt' }",
+                  "style": "${@viewportProfile == @hubRoundSmall || @viewportProfile == @hubLandscapeSmall? 'textStyleDisplay3Alt' : 'textStyleDisplay4Alt' }",
                   "color": "${color}",
                   "text": "${notation}",
                   "height": "120dp",

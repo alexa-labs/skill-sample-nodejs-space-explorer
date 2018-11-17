@@ -36,8 +36,15 @@ module.exports = (handlerInput, text) => {
 
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(TranscriptDirective(resource))
-    .speak(text)
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(TranscriptDirective(resource))
+      .speak(text)
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak('Welcome to your randome space image. This area is optimized for devices with screens. I can still tell you about this image, or you can say, "Go back."')
+      .reprompt('What would you like to do?')
+      .getResponse();
+  }
 };

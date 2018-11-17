@@ -1,22 +1,22 @@
 /*
  * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
  * 
- * Licensed under the Amazon Software License (the License).
+ * Licensed under the Amazon Software License (the "License").
  * You may not use this file except in compliance with the License.
  * A copy of the License is located at
  * 
  * http: //aws.amazon.com/asl/
  * 
- * or in the license file accompanying this file. This file is distributed
- * on an AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
 
-const ExploreSolarSystemHandler = require('./exploreSolarSystemHandler');
 const LaunchRequestHandler = require('./launchRequestHandler');
 const HelpRequestHandler = require('./helpRequestHandler');
 const EventHandler = require('./eventHandler');
+const CancelIntentHandler = require('./cancelIntentHandler');
 const FallbackHandler = require('./fallbackHandler');
 
 const ExploreZoneRequestHandler = require('./exploreZoneHandler');
@@ -40,10 +40,10 @@ const OtherRegionRequestHandler = require('./otherRegionHandler');
 const TheMoonRequestHandler = require('./theMoonHandler');
 
 module.exports = {
-  ExploreSolarSystemHandler,
   LaunchRequestHandler,
   HelpRequestHandler,
   EventHandler,
+  CancelIntentHandler,
   FallbackHandler,
   ExploreZoneRequestHandler,
   ExploreObjectRequestHandler,

@@ -38,8 +38,15 @@ module.exports = (handlerInput, destination, speak = true) => {
   attributes.location = destination;
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .speak(speak && text)
-    .addDirective(planetDirective(destination))
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .speak(speak && text)
+      .addDirective(planetDirective(destination))
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(`${text} What would you like to learn? You can ask me how big it is, how far away it is, what its atmosphere is made of, and how many moons it has. Or, you can just ask me to tell you about it.`)
+      .reprompt('What would you like to learn?')
+      .getResponse();
+  }
 };

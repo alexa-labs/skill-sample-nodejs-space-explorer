@@ -35,8 +35,15 @@ module.exports = (handlerInput, object1, object2 = 'the sun', text, speak = true
 
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .speak(speak && speech)
-    .addDirective(DistanceDirective(object1.toLowerCase(), object2.toLowerCase()))
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .speak(speak && speech)
+      .addDirective(DistanceDirective(object1.toLowerCase(), object2.toLowerCase()))
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(speech)
+      .reprompt('What elese would you like to know?')
+      .getResponse();
+  }
 };

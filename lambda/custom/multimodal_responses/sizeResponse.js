@@ -48,8 +48,15 @@ module.exports = (handlerInput, object1, object2 = 'earth', text, speak = true) 
 
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
-  return handlerInput.responseBuilder
-    .addDirective(SizeDirective(object1.toLowerCase(), obj2.toLowerCase(), comparator))
-    .speak(speak !== false && speech)
-    .getResponse();
+  if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+    return handlerInput.responseBuilder
+      .addDirective(SizeDirective(object1.toLowerCase(), obj2.toLowerCase(), comparator))
+      .speak(speak !== false && speech)
+      .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+      .speak(speech)
+      .reprompt('Anything ele you\'d like to learn?')
+      .getResponse();
+  }
 };
