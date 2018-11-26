@@ -23,15 +23,6 @@ module.exports = handlerInput => {
   const previous = sA.previousLocation;
   let directive;
 
-  if (!previous) {
-    handlerInput.attributesManager.setSessionAttributes({
-      previousLocation: [],
-      location: 'solar system'
-    });
-
-    return handlerInput.responseBuilder.addDirective(solarSystemDirective()).getResponse();
-  }
-
   if (previous.length) {
     const loc = previous.pop();
     let cleanedLoc = loc;
@@ -86,7 +77,8 @@ module.exports = handlerInput => {
     return handlerInput.responseBuilder.addDirective(solarSystemDirective()).getResponse();
   } else {
     return handlerInput.responseBuilder
-      .speak('Okay. Heading back to the solar system.')
+      .speak('Okay. Heading back to the solar system. Where would you like to explore? You can ask me to take you anywhere in our solar system. Try, "take me to Mercury."')
+      .reprompt('Where would you like to explore?')
       .getResponse();
   }
 };

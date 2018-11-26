@@ -67,7 +67,6 @@ module.exports = (handlerInput, shouldSpeak = true) => {
   } else {
     return handlerInput.responseBuilder
       .speak(moon.description)
-      .reprompt('What elese would you like to know?')
       .getResponse();
   }
 };

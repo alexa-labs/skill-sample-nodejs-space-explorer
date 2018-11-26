@@ -56,7 +56,6 @@ module.exports = (handlerInput, object1, object2 = 'earth', text, speak = true) 
   } else {
     return handlerInput.responseBuilder
       .speak(speech)
-      .reprompt('Anything ele you\'d like to learn?')
       .getResponse();
   }
 };

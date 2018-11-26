@@ -43,7 +43,6 @@ module.exports = (handlerInput, object1, object2 = 'the sun', text, speak = true
   } else {
     return handlerInput.responseBuilder
       .speak(speech)
-      .reprompt('What elese would you like to know?')
       .getResponse();
   }
 };

@@ -66,7 +66,6 @@ module.exports = (handlerInput, location, speak = true) => {
   } else {
     return handlerInput.responseBuilder
       .speak(speech)
-      .reprompt('What elese would you like to know?')
       .getResponse();
   }
 };

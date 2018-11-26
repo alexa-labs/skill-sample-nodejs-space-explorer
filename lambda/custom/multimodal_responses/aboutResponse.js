@@ -57,7 +57,6 @@ module.exports = (handlerInput, planet, speak = true) => {
   } else {
     return handlerInput.responseBuilder
       .speak(about.description)
-      .reprompt('What else would you like to learn?')
       .getResponse();
   }
 };

@@ -44,7 +44,6 @@ module.exports = (handlerInput, zone, speak = true) => {
       .getResponse();
   } else {
     return handlerInput.responseBuilder
-      .addDirective(ExploreZoneDirective(cleanedZone))
       .speak(`Welcome to the ${cleanedZone} solar system. Which planet would you like to visit?`)
       .reprompt('Which planet would you like to visit?')
       .getResponse();

@@ -65,7 +65,7 @@ const CometsRequestHandler = Handler('CometsIntent', handlerInput => {
       })
       .getResponse();
   } else {
-    handlerInput.responseBuilder
+    return handlerInput.responseBuilder
       .speak(description)
       .getResponse();
   }

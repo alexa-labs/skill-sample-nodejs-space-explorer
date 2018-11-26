@@ -16,7 +16,7 @@
 const Handler = require('../helpers/handler');
 const SolarSystemResponse = require('../multimodal_responses/solarSystemResponse');
 
-const SolarSystemRequestHandler = Handler('SolarSystem', handlerInput =>
+const SolarSystemRequestHandler = Handler('ExploreSolarSystem', handlerInput =>
   SolarSystemResponse(handlerInput)
 );
 
