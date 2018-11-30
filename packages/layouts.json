@@ -48,7 +48,7 @@
                   "type": "Container",
                   "direction": "row",
                   "alignItems": "center",
-                  "height": "40vh",
+                  "height": "35vh",
                   "item": {
                     "type": "Image",
                     "source": "${data.image}",
