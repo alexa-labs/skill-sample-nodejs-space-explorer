@@ -142,7 +142,7 @@
                 "direction": "column",
                 "width": "100%",
                 "height": "100%",
-                "paddingTop": "${distance ? 0 : '80%'}",
+                "paddingTop": "${distance ? 0 : '60%'}",
                 "items": [
                   {
                     "type": "Text",
@@ -496,6 +496,8 @@
           "direction": "column",
           "height": "100%",
           "width": "100%",
+          "alignItems": "center",
+          "justifyContent": "center",
           "items": [
             {
               "type": "Image",
@@ -509,6 +511,14 @@
               "type": "Pager",
               "height": "100%",
               "width": "100%",
+              "onPageChanged": [
+                {
+                    "type": "SetValue",
+                    "componentId": "solarSystemPaginationCounter",
+                    "property": "text",
+                    "value": "${event.source.value + 1}"
+                }
+              ],
               "items": [
                 {
                   "type": "ImagePagerItem",
@@ -547,6 +557,34 @@
                   "planet": "${data['neptune']}"
                 }
               ]
+            },
+            {
+                "type": "Container",
+                "position": "absolute",
+                "bottom": 18,
+                "alignSelf": "center",
+                "direction": "row",
+                "alignItems": "center",
+                "width": 60,
+                "justifyContent": "spaceAround",
+                "items": [
+                    {
+                        "type": "Text",
+                        "id": "solarSystemPaginationCounter",
+                        "style": "textStyleBodyAlt",
+                        "text": "1"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBodyAlt",
+                        "text": "|"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBody",
+                        "text": "9"
+                    }
+                ]
             }
           ]
         }
@@ -611,6 +649,7 @@
           "direction": "column",
           "height": "100%",
           "width": "100%",
+          "alignItems": "center",
           "items": [
             {
               "type": "Image",
@@ -627,14 +666,50 @@
               "item": {
                 "type": "ImagePagerItem"
               },
-              "data": "${listData}"
+              "data": "${listData}",
+              "onPageChanged": [
+                  {
+                      "type": "SetValue",
+                      "componentId": "zonePaginationCounter",
+                      "property": "text",
+                      "value": "${event.source.value + 1}"
+                  }
+              ]
+            },
+            {
+                "type": "Container",
+                "position": "absolute",
+                "bottom": 18,
+                "alignSelf": "center",
+                "direction": "row",
+                "alignItems": "center",
+                "width": 60,
+                "justifyContent": "spaceAround",
+                "items": [
+                    {
+                        "type": "Text",
+                        "id": "zonePaginationCounter",
+                        "style": "textStyleBodyAlt",
+                        "text": "1"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBodyAlt",
+                        "text": "|"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBody",
+                        "text": "${listData.length}"
+                    }
+                ]
             }
           ]
         }
       ]
     },
     "PlanetDetailsListItem": {
-      "parameters": ["text", "event", "ordinalNum", "planet"],
+      "parameters": ["text", "eventType", "ordinalNum", "planet"],
       "items": [
         {
           "type": "TouchWrapper",
@@ -643,7 +718,7 @@
           "onPress": [
             {
               "type": "SendEvent",
-              "arguments": ["${event}", "${planet}"]
+              "arguments": ["${eventType}", "${planet}"]
             }
           ],
           "item": [
@@ -721,35 +796,35 @@
               "planet": "${planet}",
               "ordinalNum": 1,
               "text": "Overview",
-              "event": "aboutEvent"
+              "eventType": "aboutEvent"
             },
             {
               "type": "PlanetDetailsListItem",
               "planet": "${planet}",
               "ordinalNum": 2,
               "text": "Size",
-              "event": "sizeEvent"
+              "eventType": "sizeEvent"
             },
             {
               "type": "PlanetDetailsListItem",
               "planet": "${planet}",
               "ordinalNum": 3,
               "text": "Distance",
-              "event": "distanceEvent"
+              "eventType": "distanceEvent"
             },
             {
               "type": "PlanetDetailsListItem",
               "planet": "${planet}",
               "ordinalNum": 4,
               "text": "Atmosphere",
-              "event": "compositionEvent"
+              "eventType": "compositionEvent"
             },
             {
               "type": "PlanetDetailsListItem",
               "planet": "${planet}",
               "ordinalNum": 5,
               "text": "Moons",
-              "event": "satellitesEvent"
+              "eventType": "satellitesEvent"
             },
             {
               "when": "${@viewportProfile == @hubRoundSmall}",
@@ -799,6 +874,7 @@
           "type": "Container",
           "width": "100%",
           "height": "100%",
+          "alignItems": "center",
           "items": [
             {
               "type": "Image",
@@ -812,10 +888,21 @@
               "when": "${listData.length != 0}",
               "type": "Pager",
               "data": "${listData}",
+              "position": "absolute",
+              "width": "100vw",
+              "height": "100vh",
               "items": [
                 {
                   "type": "ImagePagerItem",
                   "distance": true
+                }
+              ],
+              "onPageChanged": [
+                {
+                    "type": "SetValue",
+                    "componentId": "moonPaginationCounter",
+                    "property": "text",
+                    "value": "${event.source.value + 1}"
                 }
               ]
             },
@@ -828,6 +915,35 @@
                 "headerTitle": "MOONS",
                 "headerAttributionPrimacy": false
               }
+            },
+            {
+                "when": "${listData.length != 0}",
+                "type": "Container",
+                "position": "absolute",
+                "bottom": 18,
+                "alignSelf": "center",
+                "direction": "row",
+                "alignItems": "center",
+                "width": 60,
+                "justifyContent": "spaceAround",
+                "items": [
+                    {
+                        "type": "Text",
+                        "id": "moonPaginationCounter",
+                        "style": "textStyleBodyAlt",
+                        "text": "1"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBodyAlt",
+                        "text": "|"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "textStyleBody",
+                        "text": "${listData.length}"
+                    }
+                ]
             },
             {
               "when": "${listData.length == 0}",
