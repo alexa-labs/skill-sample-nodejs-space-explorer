@@ -9,7 +9,9 @@
                 },
                 {
                     "name": "AMAZON.CancelIntent",
-                    "samples": []
+                    "samples": [
+                        "cancel"
+                    ]
                 },
                 {
                     "name": "AMAZON.HelpIntent",
@@ -21,7 +23,9 @@
                 },
                 {
                     "name": "AMAZON.StopIntent",
-                    "samples": []
+                    "samples": [
+                        "stop"
+                    ]
                 },
                 {
                     "name": "AMAZON.NavigateHomeIntent",
@@ -333,23 +337,6 @@
                     ]
                 },
                 {
-                    "name": "ObjectUnique",
-                    "slots": [
-                        {
-                            "name": "celestial_object",
-                            "type": "CelestialObjects"
-                        }
-                    ],
-                    "samples": [
-                        "tell me something interesting about {celestial_object}",
-                        "tell me something interesting about it",
-                        "what's special about {celestial_object}",
-                        "what's special about it",
-                        "tell me something unique about {celestial_object}",
-                        "tell me something unique"
-                    ]
-                },
-                {
                     "name": "TestIntent",
                     "slots": [],
                     "samples": [
@@ -461,7 +448,7 @@
                     "values": [
                         {
                             "name": {
-                                "value": "sun"
+                                "value": "the sun"
                             }
                         },
                         {
