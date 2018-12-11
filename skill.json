@@ -27,6 +27,9 @@
         "interfaces": [
           {
             "type": "ALEXA_PRESENTATION_APL"
+          },
+          {
+            "type": "RENDER_TEMPLATE"
           }
         ]
       }
