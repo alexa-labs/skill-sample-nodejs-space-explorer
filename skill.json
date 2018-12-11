@@ -10,7 +10,7 @@
             "Alexa ask hello world say hello"
           ],
           "name": "Space Explorer APL Sample Skill",
-          "description": "Build beautiful, funtional interfaces for your users. This sample skill contains best practices and examples of how to develop high-quality visual experiences using APL."
+          "description": "Build beautiful, functional interfaces for your users. This sample skill contains best practices and examples of how to develop high-quality visual experiences using APL."
         }
       },
       "isAvailableWorldwide": true,
@@ -21,14 +21,15 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "sourceDir": "lambda/custom"
-        }
-      },
-      "interfaces": [
-        {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-space-explorer"
+        },
+        "interfaces": [
+          {
             "type": "ALEXA_PRESENTATION_APL"
-        }
-      ]
+          }
+        ]
+      }
     },
     "manifestVersion": "1.0"
   }
