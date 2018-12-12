@@ -9,6 +9,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_earth_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/earth-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -67,6 +68,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_jupiter_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/jupiter-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -137,6 +139,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mars_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/mars-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -199,6 +202,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_mercury_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/mercury-spin-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [],
@@ -231,6 +235,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_neptune_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/neptune-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -283,6 +288,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_pluto_4.jpg"
             ],
+            "video": null,
             "source": "NASA"
         },
         "atmosphere": [
@@ -331,6 +337,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_saturn_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/saturn-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -385,6 +392,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/sun_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/sun_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/sun-nosound.mp4",
             "source": "NASA"
         },
         "age": "4.5 billion years",
@@ -417,6 +425,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_uranus_4.jpg"
             ],
+            "video": "https://s3-us-west-2.amazonaws.com/ddg-skill/videos/uranus-nosound.mp4",
             "source": "NASA"
         },
         "atmosphere": [
@@ -481,6 +490,7 @@
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus_3.jpg",
                 "https://d1od0khoye9qi3.cloudfront.net/assets/planet_venus_4.jpg"
             ],
+            "video": null,
             "source": "NASA"
         },
         "atmosphere": [

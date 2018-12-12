@@ -66,6 +66,45 @@ module.exports = (resource, title = null) => ({
               bottom: 0,
               item: [
                 {
+                  when: resource.video !== null,
+                  type: 'Container',
+                  width: '100vw',
+                  height: '100vh',
+                  items: [
+                    {
+                      type: 'Video',
+                      id: 'videoPlayer',
+                      source: resource.video,
+                      audioTrack: 'none',
+                      autoplay: true,
+                      height: '100vh',
+                      width: 'auto',
+                      scale: 'best-fill',
+                      onEnd: [
+                        {
+                          type: 'ControlMedia',
+                          componentId: 'videoPlayer',
+                          command: 'rewind'
+                        },
+                        {
+                          type: 'ControlMedia',
+                          componentId: 'videoPlayer',
+                          command: 'play'
+                        }
+                      ]
+                    },
+                    {
+                      type: 'Frame',
+                      position: 'absolute',
+                      width: '100vw',
+                      height: '100vh',
+                      backgroundColor: 'black',
+                      opacity: 0.4
+                    }
+                  ]
+                },
+                {
+                  when: resource.video === null,
                   type: 'Image',
                   scale: 'best-fill',
                   width: '100vw',
@@ -92,12 +131,15 @@ module.exports = (resource, title = null) => ({
               width: '100%',
               height: '100%',
               id: 'scrollContainer',
-              onScroll: {
-                type: 'SetValue',
-                componentId: 'bgImage',
-                property: 'opacity',
-                value: '${Math.max(1 - event.source.value, 0.4)}'
-              },
+              onScroll: [
+                {
+                  when: resource.video === null,
+                  type: 'SetValue',
+                  componentId: 'bgImage',
+                  property: 'opacity',
+                  value: '${Math.max(1 - event.source.value, 0.4)}'
+                }
+              ],
               items: [
                 {
                   type: 'Container',
@@ -106,6 +148,7 @@ module.exports = (resource, title = null) => ({
                       when: title !== null,
                       type: 'AlexaHeader',
                       position: 'absolute',
+                      width: '100vw',
                       headerTitle: title,
                       headerBackButton: 1,
                       headerNavigationAction: 'backEvent'
@@ -131,7 +174,7 @@ module.exports = (resource, title = null) => ({
                           type: 'Text',
                           style: 'textStyleLabel',
                           paddingBottom: '26dp',
-                          text: `Image: ${resource.source}`
+                          text: `${resource.video !== null ? 'Video' : 'Image'}: ${resource.source}`
                         },
                         {
                           type: 'Text',
