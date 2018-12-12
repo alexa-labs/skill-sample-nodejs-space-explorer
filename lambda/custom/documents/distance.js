@@ -212,7 +212,7 @@ module.exports = (planet1, planet2) => {
                           when: `\${((@viewportProfile == @hubLandscapeMedium && viewport.height > 600) || @viewportProfile != @hubLandscapeMedium) && ${planet2 ===
                             'the sun'}}`,
                           type: 'Container',
-                          spacing: '48dp',
+                          spacing: '68dp',
                           items: [
                             {
                               type: 'Text',

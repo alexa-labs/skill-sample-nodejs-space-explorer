@@ -101,7 +101,7 @@ module.exports = planet => {
                   type: 'Container',
                   paddingLeft: '@marginLeft',
                   paddingRight: '@marginRight',
-                  paddingTop: '25%',
+                  paddingTop: '25vh',
                   height: '100%',
                   items: [{ type: 'PlanetDetailsList', planet: planet.toLowerCase() }]
                 }

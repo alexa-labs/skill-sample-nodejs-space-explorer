@@ -155,25 +155,17 @@ module.exports = (planet, comp) => {
                 source: planetData.backgroundImage
               },
               {
-                type: 'Container',
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                left: 0,
-                items: [
-                  {
-                    type: 'AlexaHeader',
-                    headerTitle: `${planet.toUpperCase()} · ATMOSPHERE`,
-                    headerBackButton: 1,
-                    headerNavigationAction: 'backEvent'
-                  }
-                ]
+                type: 'AlexaHeader',
+                headerTitle: `${planet.toUpperCase()} · ATMOSPHERE`,
+                headerBackButton: 1,
+                headerNavigationAction: 'backEvent',
+                "width": "100%",
               },
               {
                 when: '${@viewportProfile != @tvLandscapeXLarge}',
                 type: 'Container',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'spaceAround',
                 width: '100%',
                 height: '70%',
                 paddingLeft: '6vw',
@@ -252,17 +244,8 @@ module.exports = (planet, comp) => {
                 ]
               },
               {
-                type: 'Container',
-                position: 'absolute',
-                bottom: 0,
-                right: 0,
-                left: 0,
-                items: [
-                  {
-                    type: 'AlexaFooter',
-                    hintText: '${payload.data.properties.hint}'
-                  }
-                ]
+                type: 'AlexaFooter',
+                hintText: '${payload.data.properties.hint}'
               }
             ]
           }
