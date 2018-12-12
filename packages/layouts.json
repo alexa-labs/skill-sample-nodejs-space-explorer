@@ -847,14 +847,14 @@
               "planet": "${planet}",
               "ordinalNum": 1,
               "text": "Overview",
-              "event": "aboutEvent"
+              "eventType": "aboutEvent"
             },
             {
               "type": "PlanetDetailsListItem",
               "planet": "${planet}",
               "ordinalNum": 2,
               "text": "Size",
-              "event": "sizeEvent"
+              "eventType": "sizeEvent"
             }
           ]
         }
