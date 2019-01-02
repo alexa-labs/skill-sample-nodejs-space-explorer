@@ -80,9 +80,6 @@ module.exports = () => {
           }
         }
       ],
-      features: {
-        idleTimeout: 91000
-      },
       mainTemplate: {
         parameters: ['payload'],
         item: {

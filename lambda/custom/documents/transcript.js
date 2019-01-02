@@ -42,9 +42,6 @@ module.exports = (resource, title = null) => ({
         source: `${cdnPath}apl/styles.json`
       }
     ],
-    features: {
-      idleTimeout: 60000
-    },
     mainTemplate: {
       parameters: ['payload'],
       item: [
@@ -54,52 +51,31 @@ module.exports = (resource, title = null) => ({
           height: '100%',
           item: [
             {
-              type: 'Frame',
-              id: 'bgImage',
-              backgroundColor: 'black',
+              type: 'Container',
               width: '100vw',
               height: '100vh',
               position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              item: [
+              items: [
                 {
                   when: resource.video !== null,
-                  type: 'Container',
-                  width: '100vw',
+                  type: 'Video',
+                  id: 'videoPlayer',
+                  source: resource.video,
+                  audioTrack: 'none',
+                  autoplay: true,
                   height: '100vh',
-                  items: [
+                  width: 'auto',
+                  scale: 'best-fill',
+                  onEnd: [
                     {
-                      type: 'Video',
-                      id: 'videoPlayer',
-                      source: resource.video,
-                      audioTrack: 'none',
-                      autoplay: true,
-                      height: '100vh',
-                      width: 'auto',
-                      scale: 'best-fill',
-                      onEnd: [
-                        {
-                          type: 'ControlMedia',
-                          componentId: 'videoPlayer',
-                          command: 'rewind'
-                        },
-                        {
-                          type: 'ControlMedia',
-                          componentId: 'videoPlayer',
-                          command: 'play'
-                        }
-                      ]
+                      type: 'ControlMedia',
+                      componentId: 'videoPlayer',
+                      command: 'rewind'
                     },
                     {
-                      type: 'Frame',
-                      position: 'absolute',
-                      width: '100vw',
-                      height: '100vh',
-                      backgroundColor: 'black',
-                      opacity: 0.4
+                      type: 'ControlMedia',
+                      componentId: 'videoPlayer',
+                      command: 'play'
                     }
                   ]
                 },
@@ -111,6 +87,15 @@ module.exports = (resource, title = null) => ({
                   height: '100vh',
                   source: resource.image,
                   opacity: 1
+                },
+                {
+                  type: 'Frame',
+                  position: 'absolute',
+                  id: 'mediaScrim',
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundColor: 'black',
+                  opacity: 0
                 }
               ]
             },
@@ -133,11 +118,10 @@ module.exports = (resource, title = null) => ({
               id: 'scrollContainer',
               onScroll: [
                 {
-                  when: resource.video === null,
                   type: 'SetValue',
-                  componentId: 'bgImage',
+                  componentId: 'mediaScrim',
                   property: 'opacity',
-                  value: '${Math.max(1 - event.source.value, 0.4)}'
+                  value: '${Math.min(event.source.value * 2, 0.6)}'
                 }
               ],
               items: [

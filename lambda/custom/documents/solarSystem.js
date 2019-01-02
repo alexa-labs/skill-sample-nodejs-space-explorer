@@ -43,9 +43,6 @@ module.exports = () => ({
         source: `${cdnPath}apl/styles.json`
       }
     ],
-    features: {
-      idleTimeout: 91000
-    },
     mainTemplate: {
       parameters: ['payload'],
       item: {

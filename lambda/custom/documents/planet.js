@@ -55,7 +55,6 @@ module.exports = planet => {
         { name: 'layouts', version: '1.0.0', source: `${cdnPath}apl/layouts.json` },
         { name: 'styles', version: '1.0.0', source: `${cdnPath}apl/styles.json` }
       ],
-      features: { idleTimeout: 60000 },
       mainTemplate: {
         parameters: ['payload'],
         item: {

@@ -82,9 +82,6 @@ module.exports = (planet, comp) => {
           source: `${cdnPath}apl/styles.json`
         }
       ],
-      features: {
-        idleTimeout: 60000
-      },
       mainTemplate: {
         parameters: ['payload'],
         items: [

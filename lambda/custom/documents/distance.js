@@ -79,9 +79,6 @@ module.exports = (planet1, planet2) => {
           source: `${cdnPath}apl/styles.json`
         }
       ],
-      features: {
-        idleTimeout: 60000
-      },
       mainTemplate: {
         parameters: ['payload'],
         item: {

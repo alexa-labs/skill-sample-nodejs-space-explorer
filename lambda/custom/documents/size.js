@@ -44,7 +44,6 @@ module.exports = (planet1, planet2, comparator) => {
         { name: 'styles', version: '1.0.0', source: `${cdnPath}apl/styles.json` }
       ],
       resources: [{ strings: { fontFamilyRomanSans: 'amazon-ember-display' } }],
-      features: { idleTimeout: 60000 },
       mainTemplate: {
         parameters: ['payload'],
         item: {
