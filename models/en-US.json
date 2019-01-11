@@ -32,58 +32,6 @@
                     "samples": []
                 },
                 {
-                    "name": "AMAZON.MoreIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.NavigateSettingsIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.NextIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PageUpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PageDownIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PreviousIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ScrollRightIntent",
-                    "samples": [
-                        "go right",
-                        "scroll right"
-                    ]
-                },
-                {
-                    "name": "AMAZON.ScrollDownIntent",
-                    "samples": [
-                        "go up",
-                        "scroll down"
-                    ]
-                },
-                {
-                    "name": "AMAZON.ScrollLeftIntent",
-                    "samples": [
-                        "go left",
-                        "scroll left"
-                    ]
-                },
-                {
-                    "name": "AMAZON.ScrollUpIntent",
-                    "samples": [
-                        "go down",
-                        "scroll up"
-                    ]
-                },
-                {
                     "name": "HelloIntent",
                     "slots": [],
                     "samples": [
@@ -312,14 +260,6 @@
                     ]
                 },
                 {
-                    "name": "ExploreSolarSystem",
-                    "slots": [],
-                    "samples": [
-                        "explore the solar system",
-                        "lets explore the solar system"
-                    ]
-                },
-                {
                     "name": "ExploreZones",
                     "slots": [
                         {
@@ -440,6 +380,46 @@
                         "{show_tell} earth moon",
                         "{show_tell} the moon"
                     ]
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
                 }
             ],
             "types": [
@@ -756,7 +736,8 @@
                     "prompts": {},
                     "slots": []
                 }
-            ]
+            ],
+            "delegationStrategy": "SKILL_RESPONSE"
         },
         "prompts": [
             {
