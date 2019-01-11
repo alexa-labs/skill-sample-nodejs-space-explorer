@@ -78,6 +78,12 @@ module.exports = () => {
           strings: {
             landingImage: 'https://d1od0khoye9qi3.cloudfront.net/assets/landing_480_480.jpg'
           }
+        },
+        {
+          strings: {
+            videoLandingImage: 'https://d1od0khoye9qi3.cloudfront.net/video_splash.jpg',
+            videoLandingVideo: 'https://d1od0khoye9qi3.cloudfront.net/videos/SpaceExplorer_Splash_v1.mp4'
+          }
         }
       ],
       mainTemplate: {
@@ -154,27 +160,50 @@ module.exports = () => {
                   alignItems: 'center',
                   items: [
                     {
-                      type: 'Text',
-                      style: 'textStyleDisplay1Alt',
-                      fontSize: '20vh',
-                      fontWeight: '100',
-                      text: 'SPACE',
-                      letterSpacing: '6.6vw'
-                    },
-                    {
-                      type: 'Text',
-                      style: 'textStyleHeadline',
-                      fontSize: '5.5vh',
-                      text: 'EXPLORER',
-                      fontWeight: '800'
-                    },
-                    {
                       type: 'Image',
+                      id: 'splashImageImage',
                       width: '100vw',
                       height: '100vh',
                       scale: 'best-fill',
-                      source: '@landingImage',
-                      position: 'absolute'
+                      source: '@videoLandingImage',
+                      position: 'absolute',
+                      opacity: 0
+                    },
+                    {
+                      type: 'Video',
+                      id: 'splashVideo',
+                      width: '180vh',
+                      height: '100vh',
+                      scale: 'best-fill',
+                      position: 'absolute',
+                      autoplay: true,
+                      audioTrack: 'foreground',
+                      source: '@videoLandingVideo',
+                      onEnd: [
+                        {
+                          type: 'Parallel',
+                          commands: [
+                            {
+                              type: 'SetValue',
+                              componentId: 'splashVideo',
+                              property: 'opacity',
+                              value: 0
+                            },
+                            {
+                              type: 'SetValue',
+                              componentId: 'splashImageImage',
+                              property: 'opacity',
+                              value: 1
+                            },
+                            {
+                              type: 'SendEvent',
+                              arguments: [
+                                'launchVideoEnded'
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

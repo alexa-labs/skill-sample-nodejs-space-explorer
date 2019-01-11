@@ -39,7 +39,7 @@ const LaunchRequestHandler = {
             componentId: 'splashScroller',
             highlightMode: 'line',
             align: 'center',
-            delay: 2000
+            delay: 12000
           }
         ]
       })
