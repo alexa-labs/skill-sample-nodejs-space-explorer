@@ -82,7 +82,7 @@ module.exports = () => {
         {
           strings: {
             videoLandingImage: 'https://d1od0khoye9qi3.cloudfront.net/video_splash.jpg',
-            videoLandingVideo: 'https://d1od0khoye9qi3.cloudfront.net/videos/SpaceExplorer_Splash_v1.mp4'
+            videoLandingVideo: 'https://d1od0khoye9qi3.cloudfront.net/videos/SpaceExplorer_Splash_v2.mp4'
           }
         }
       ],
