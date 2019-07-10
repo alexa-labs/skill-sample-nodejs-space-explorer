@@ -46,7 +46,7 @@ const SessionEndedRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
   },
   handle(handlerInput) {
-    return handlerInput.responseBuilder.speak("I hoped you've enjoyed your visit.").getResponse();
+    return;
   }
 };
 

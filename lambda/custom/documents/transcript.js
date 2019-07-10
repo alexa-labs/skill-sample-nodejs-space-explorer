@@ -25,11 +25,11 @@ module.exports = (resource, title = null) => ({
     import: [
       {
         name: 'alexa-styles',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'alexa-layouts',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'layouts',
@@ -42,6 +42,21 @@ module.exports = (resource, title = null) => ({
         source: `${cdnPath}apl/styles.json`
       }
     ],
+    styles: {
+      karaokeStyle: {
+        extends: 'textStyleKaraoke',
+        values: [
+          {
+            when: '${state.karaokeTarget}',
+            opacity: 1
+          },
+          {
+            when: '${state.karaoke}',
+            opacity: '@opacityDisabled'
+          }
+        ]
+      }
+    },
     mainTemplate: {
       parameters: ['payload'],
       item: [
@@ -57,7 +72,7 @@ module.exports = (resource, title = null) => ({
               position: 'absolute',
               items: [
                 {
-                  when: resource.video !== null,
+                  when: resource.video != null || resource.video != undefined,
                   type: 'Video',
                   id: 'videoPlayer',
                   source: resource.video,
@@ -80,7 +95,7 @@ module.exports = (resource, title = null) => ({
                   ]
                 },
                 {
-                  when: resource.video === null,
+                  when: !resource.video,
                   type: 'Image',
                   scale: 'best-fill',
                   width: '100vw',
@@ -118,10 +133,21 @@ module.exports = (resource, title = null) => ({
               id: 'scrollContainer',
               onScroll: [
                 {
-                  type: 'SetValue',
-                  componentId: 'mediaScrim',
-                  property: 'opacity',
-                  value: '${Math.min(event.source.value * 2, 0.6)}'
+                  type: 'Parallel',
+                  commands: [
+                    {
+                      type: 'SetValue',
+                      componentId: 'mediaScrim',
+                      property: 'opacity',
+                      value: '${Math.min(event.source.value * 2, 0.6)}'
+                    },
+                    {
+                      type: 'SetValue',
+                      componentId: 'header',
+                      property: 'opacity',
+                      value: '${1 - (event.source.value * 2)}'
+                    }
+                  ]
                 }
               ],
               items: [
@@ -129,19 +155,10 @@ module.exports = (resource, title = null) => ({
                   type: 'Container',
                   items: [
                     {
-                      when: title !== null,
-                      type: 'AlexaHeader',
-                      position: 'absolute',
-                      width: '100vw',
-                      headerTitle: title,
-                      headerBackButton: 1,
-                      headerNavigationAction: 'backEvent'
-                    },
-                    {
                       type: 'Container',
-                      paddingTop: '75vh',
-                      paddingLeft: '@marginLeft',
-                      paddingRight: '@marginRight',
+                      paddingTop: '${viewport.height >= 600 ? \'75vh\' : \'65vh\'}',
+                      paddingLeft: '@marginHorizontal',
+                      paddingRight: '@marginHorizontal',
                       paddingBottom: 150,
                       width: '100%',
                       backgroundColor: 'black',
@@ -149,23 +166,24 @@ module.exports = (resource, title = null) => ({
                       item: [
                         {
                           type: 'Text',
-                          style: 'textStyleHeadlineAlt',
+                          style: 'textStyleBodyAlt',
                           spacing: resource.source ? '10dp' : 0,
                           text: resource.title
                         },
                         {
                           when: resource.source !== undefined,
                           type: 'Text',
-                          style: 'textStyleLabel',
+                          style: 'textStyleCallout',
                           paddingBottom: '26dp',
                           text: `${resource.video !== null ? 'Video' : 'Image'}: ${resource.source}`
                         },
                         {
                           type: 'Text',
-                          style: 'textStyleKaraoke',
+                          style: 'karaokeStyle',
+                          highlightMode: 'line',
                           spacing: resource.source ? '26dp' : '60dp',
                           text: '${payload.resource.properties.text}',
-                          id: 'imageText',
+                          id: 'karaokeText',
                           speech: '${payload.resource.properties.speech}'
                         }
                       ]
@@ -173,7 +191,18 @@ module.exports = (resource, title = null) => ({
                   ]
                 }
               ]
-            }
+            },
+            {
+              when: title !== null,
+              type: 'AlexaHeader',
+              id: 'header',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              headerTitle: title,
+              headerBackButton: true
+            },
           ]
         }
       ]

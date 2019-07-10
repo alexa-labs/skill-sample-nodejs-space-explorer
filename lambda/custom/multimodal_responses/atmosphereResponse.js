@@ -61,6 +61,15 @@ module.exports = (handlerInput, location, speak = true) => {
   if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
     return handlerInput.responseBuilder
       .addDirective(CompositionDirective(location.toLowerCase(), comp))
+      // .addDirective({
+      //   type: 'Alexa.Presentation.APL.ExecuteCommands',
+      //   token: 'atmospheric-composition',
+      //   commands: [
+      //     {
+      //       type: 'onLoad'
+      //     }
+      //   ]
+      // })
       .speak(speak && speech)
       .getResponse();
   } else {

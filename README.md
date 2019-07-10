@@ -4,6 +4,21 @@
 
 Alexa Presentation Language (APL) gives developers the ability to create rich, engaging and unique visual experiences for users. This skill is meant to be an example of how to use the language, the capabilities of APL, and how to think about and develop true, multi-modal experiences for Alexa-enabled devices with a screen.
 
+## APL 1.1 Release Updates
+
+A number of new features and offerings have allowed us to expand on the Space Explorer experience. Some of the things leveraged in this update include:
+
+- Video
+- Animations
+- Alexa Vector Graphics (AVG)
+- Alexa Responsive Layouts
+
+Additionally, we've created a new animation package that allows us to reuse the same animation framework across all our pages. This drastically reduces the amount of code we need to write, allows us to paramaterize our custom animations and maintain a consitent feel across the skill. Take a look at [soft-stagger.json](packages/soft-stagger.json) for the code behind how we achieved this.
+
+### Alexa Responsive Layouts
+
+One of the biggest time-savers for us was the inclusion of the Alexa Responsive Layouts. These are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these in our code let us eliminate several lines of code and conditional statements throughout the skill. It also alleviates the nedd to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
+
 ## Quicklinks
 
 - [Tenets](#design-tenets)

@@ -37,22 +37,27 @@ const MoreInfoRequestHandler = Handler('MoreInfo', handlerInput => {
     if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
       return handlerInput.responseBuilder
         .addDirective({
-          type: 'Alexa.Presentation.APL.ExecuteCommands',
-          token: 'transcript_document',
-          commands: [
-            {
-              type: 'SpeakItem',
-              componentId: 'imageText',
-              highlightMode: 'line',
-              align: 'center'
-            },
-            {
-              type: 'Scroll',
-              componentId: 'scrollContainer',
-              distance: -10000
-            }
-          ]
-        })
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'transcript_document',
+        commands: [
+          {
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: 'karaokeText',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
+          }
+        ]
+      })
         .getResponse();
     } else {
       return handlerInput.responseBuilder

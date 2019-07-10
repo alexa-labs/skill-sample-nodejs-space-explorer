@@ -13,21 +13,13 @@
  * permissions and limitations under the License.
  */
 
-const data = require('../data/planets.json');
 const cdnPath = require('../helpers/cdn-path');
 
-function capitalize(string) {
-  const arr = string.split('');
-
-  arr[0] = arr[0].toUpperCase();
-  return arr.join('');
-}
-
-module.exports = planet => ({
+module.exports = (resource, title = null) => ({
   type: 'Alexa.Presentation.APL.RenderDocument',
-  token: 'object_satellites',
+  token: 'transcript_document',
   document: {
-    type: 'APML',
+    type: 'APL',
     version: '1.0',
     theme: 'dark',
     import: [
@@ -52,44 +44,42 @@ module.exports = planet => ({
     ],
     mainTemplate: {
       parameters: ['payload'],
-      item: {
-        type: 'ImageList',
-        backgroundImage: '${payload.data.properties.backgroundImage}',
-        hintText: '${payload.data.properties.hint}',
-        listData: '${payload.data.properties.listItems}',
-        planet: capitalize(planet),
-        title: `${planet.toUpperCase()} • MOONS`,
-        opacity: 0,
-        onMount: [
-          {
-            type: 'AnimateItem',
-            duration: 500,
-            easing: 'linear',
-            value: [
-              {
-                property: 'opacity',
-                from: 0,
-                to: 1
-              }
-            ]
-          }
-        ]
-      }
+      item: [
+        {
+          type: 'Container',
+          width: '100vw',
+          height: '100vh',
+          items: [
+            {
+              type: 'AlexaTranscript',
+              speakItemComponentId: 'imageText',
+              requestString: resource.title,
+              primaryContent: 'text',
+              karaokeText: '${payload.resource.properties.text}',
+              karaokeSpeech: '${payload.resource.properties.speech}',
+              backgroundImageSource: !resource.video ? resource.image : null,
+              backgroundVideoSource: resource.video,
+              backgroundOverlayGradient: true,
+              backgroundVideoAutoPlay: true,
+              backgroundVideoAudioTrack: 'none'
+            }
+          ]
+        }
+      ]
     }
   },
   datasources: {
-    data: {
+    resource: {
       type: 'object',
       properties: {
-        backgroundImage: data.backgroundImage,
-        listItems: data[planet].satellites.interesting,
-        hintText: 'how many moons does Venus have?'
+        ssml: `<speak>${resource.description}</speak>`,
+        text: resource.description
       },
       transformers: [
         {
-          inputPath: 'hintText',
-          outputName: 'hint',
-          transformer: 'textToHint'
+          inputPath: 'ssml',
+          outputName: 'speech',
+          transformer: 'ssmlToSpeech'
         }
       ]
     }

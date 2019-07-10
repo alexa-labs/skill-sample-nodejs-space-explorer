@@ -14,7 +14,6 @@
  */
 
 const SolarSystemDirective = require('../documents/launch');
-// const SolarSystemDirective = require('../documents/test');
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -30,23 +29,6 @@ const LaunchRequestHandler = {
     if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
       return handlerInput.responseBuilder
       .addDirective(SolarSystemDirective())
-      .addDirective({
-        type: 'Alexa.Presentation.APL.ExecuteCommands',
-        token: 'splash-screen',
-        commands: [
-          {
-            type: 'SpeakItem',
-            componentId: 'splashScroller',
-            highlightMode: 'line',
-            align: 'center',
-            delay: 12000
-          }
-        ]
-      })
-      .speak(
-        'Welcome to our solar system. It is made up of a star, eight planets and countless smaller bodies.'
-      )
-      // .prompt('How are things?')
       .getResponse();
     } else {
       return handlerInput.responseBuilder

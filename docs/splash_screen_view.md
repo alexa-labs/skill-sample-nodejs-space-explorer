@@ -4,11 +4,10 @@
 
 ## Overview
 
-The splash screen is displayed when first opening the skill. It is intended to mask the loading of the solar system images. It is using a clever combination of a Frame, Image and hidden ScrollView with Text. A SpeakItem directive with a delay is used to initiate the scrolling of the hidden view, which causes the opacity of the Frame and Image to be set at 0, revealing the solar system below while speaking an additional phrase.
+The splash screen is displayed when first opening the skill. It is intended to mask the loading of the solar system images. With the release of APL 1.1, we were able to implement a solution that uses the video ending to trigger an opacity transition that reveals the solar system.
 
 ### Layout Notes
 
-- This is a temporary solution until animation commands are implemented.
 - See [Solar System View](https://quip-amazon.com/gdEpAcbg3pCA) for additional details.
 
 ## Layout
@@ -23,8 +22,7 @@ None.
 
 - Frame
 - Image
-- Text
-  - SpeakItem directive to read the text.
+- Video
 
 ## Variations
 

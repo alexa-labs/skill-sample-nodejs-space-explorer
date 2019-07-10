@@ -13,11 +13,13 @@
  * permissions and limitations under the License.
  */
 
+const Handler = require('../helpers/handler');
+const cdnPath = require('../helpers/cdn-path');
+const TranscriptDirective = require('../documents/transcript');
+
 const description =
   "Comets are cosmic snowballs of frozen gases, rock and dust that orbit the Sun. When frozen, they are the size of a small town. When a comet's orbit brings it close to the Sun, it heats up and spews dust and gases into a giant glowing head larger than most planets. The dust and gases form a tail that stretches away from the Sun for millions of miles. There are likely billions of comets orbiting our Sun in the Kuiper Belt and even more distant Oort Cloud. The current number of known comets is: 3,535";
 
-const Handler = require('../helpers/handler');
-const TranscriptDirective = require('../documents/transcript');
 
 const CometsRequestHandler = Handler('CometsIntent', handlerInput => {
   const attributes = handlerInput.attributesManager.getSessionAttributes();
@@ -40,7 +42,7 @@ const CometsRequestHandler = Handler('CometsIntent', handlerInput => {
     return handlerInput.responseBuilder
       .addDirective(
         TranscriptDirective({
-          image: 'https://s3-us-west-2.amazonaws.com/ddg-skill/assets/comet.jpg',
+          image: `${cdnPath}assets/comet.jpg`,
           title: 'Comets',
           source: 'NASA',
           description
@@ -51,15 +53,20 @@ const CometsRequestHandler = Handler('CometsIntent', handlerInput => {
         token: 'transcript_document',
         commands: [
           {
-            type: 'SpeakItem',
-            componentId: 'imageText',
-            highlightMode: 'line',
-            align: 'center'
-          },
-          {
-            type: 'Scroll',
-            componentId: 'scrollContainer',
-            distance: -10000
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: 'karaokeText',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
           }
         ]
       })

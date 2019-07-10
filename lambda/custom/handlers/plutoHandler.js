@@ -16,7 +16,6 @@
 const Handler = require('../helpers/handler');
 const data = require('../data/planets.json');
 const TranscriptDirective = require('../documents/transcript');
-const speakDirective = require('../documents/speakDirective');
 
 const description = 'In 2006, after the discovery of more massive objects in the distant region of our solar system known as the Kuiper Belt, the official definition of the term "planet" was revised. This revision excluded Pluto, which was reclassified as a dwarf planet.'
 
@@ -52,7 +51,28 @@ const PlutoRequestHandler = Handler('PlutoIntent', handlerInput => {
           'LEARN MORE'
         )
       )
-      .addDirective(speakDirective())
+      .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'transcript_document',
+        commands: [
+          {
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: 'karaokeText',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
+          }
+        ]
+      })
       .getResponse();
   } else {
     return handlerInput.responseBuilder

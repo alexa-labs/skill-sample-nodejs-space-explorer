@@ -8,6 +8,10 @@ When the skill opens, following the splash screen, the Solar System view is pres
 
 This view uses Images to render each of the planets. Each planet is wrapped with a Touch Wrapper to support touch and Fire TV remote control navigation in addition to voice.
 
+### Updates
+
+Staggered animations were added that uses the document's `onMount` field to trigger when the page loads.
+
 ### Layout Notes
 
 - Within the footer, a `textToHint` transform is used to create a Hint, which adds the user-defined wake word to a provided string. This is then supplied to the `AlexaFooter`'s `footerHint`\* _property_.\*
@@ -43,6 +47,6 @@ On Fire TV devices, the `TouchWrappers` allow for navigation using the remote co
 
 On our Hub Devices, the layout remains the same as the Fire TV, but we conditionally add additional `TouchWrappers` to account for small targets that allow the user to navigate to a supplimentary view for easier planet selection. Pressed states provide user feedback for interactions.
 
-### **Small Hubs**
+### **Small Round Hubs**
 
 The layout is drastically altered to accommodate the smaller screen, converting the solar system to a `Pager`, with individual, full-screen `TouchWrappers` containing Images for each planet. Pressed states are still present for interactions. There is a subtle gradient scrim on the bottom of the image to increase legibility of the text while maintaining the vibrancy of the imagery.

@@ -6,6 +6,10 @@
 
 This is a comparison view for planet size. `Text` callouts feature relevant information, while `Frames` create graphical representations of size differences.
 
+### Updates
+
+Staggered animations were added that uses the document's `onMount` field to trigger when the page loads.
+
 ### Layout Notes
 
 - The size comparison graphic is created using `Frames` and programmatically determined zIndex and relative sizes.
@@ -36,6 +40,6 @@ This is a comparison view for planet size. `Text` callouts feature relevant info
 
 The layout is the same for these devices, with the exception of medium hub dropping some text for size issues.
 
-### **Small Hubs**
+### **Small Round Hubs**
 
-The layout is converted to a `Pager`, with callout information on one page and programmatically generated `Frames` on the other.
+The layout is converted to a `Pager`, with callout information on one page and programmatically generated `Frames` on the other. The `onPageChanged` event is used to add a transition animation to the page elements.

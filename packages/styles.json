@@ -1,6 +1,12 @@
 {
     "type": "APL",
     "version": "1.0.0",
+    "import": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
+        }
+    ],
     "resources": [
         {
             "strings": {
@@ -8,11 +14,17 @@
             }
         },
         {
-            "description": "sizing for non-tv devices",
-            "when": "${@viewportProfile != @tvLandscapeXLarge}",
+            "description": "default sizing",
             "dimensions": {
                 "ordinalSize": "52dp",
                 "itemHeight": "107dp"
+            }
+        },
+        {
+            "description": "sizing for smaller hubs",
+            "when": "${@viewportProfile == @hubLandscapeSmall || @viewportProfile == @hubLandscapeMedium}",
+            "dimensions": {
+                "itemHeight": "72dp"
             }
         },
         {
@@ -39,13 +51,6 @@
                 "indicatorSize": "21dp",
                 "indicatorStroke": "3dp",
                 "indicatorSpacing": "13dp"
-            }
-        },
-        {
-            "description": "Viewport Profile modifier for Alexa on Tablet Show mode",
-            "when": "${@viewportShape == @viewportShapeRectangle && @viewportOrientation == @viewportOrientationLandscape && @viewportSizeClass >= @viewportClassLargeSmall && @viewportDensity == @viewportDensityNormal}",
-            "strings": {
-                "viewportProfile": "@hubLandscapeLarge"
             }
         }
     ],

@@ -14,6 +14,7 @@
  */
 
 const Handler = require('../helpers/handler');
+const cdnPath = require('../helpers/cdn-path');
 const data = require('../data/planets.json');
 const TranscriptDirective = require('../documents/transcript');
 
@@ -52,7 +53,7 @@ const ObjectRingHandler = Handler('ObjectRings', handlerInput => {
       .addDirective(
         TranscriptDirective(
           {
-            image: `https://s3-us-west-2.amazonaws.com/ddg-skill/assets/rings_${location.toLowerCase()}.jpg`,
+            image: `${cdnPath}assets/rings_${location.toLowerCase()}.jpg`,
             description: data[location.toLowerCase()].rings,
             source: 'NASA'
           },
@@ -64,15 +65,20 @@ const ObjectRingHandler = Handler('ObjectRings', handlerInput => {
         token: 'transcript_document',
         commands: [
           {
-            type: 'SpeakItem',
-            componentId: 'imageText',
-            highlightMode: 'line',
-            align: 'center'
-          },
-          {
-            type: 'Scroll',
-            componentId: 'scrollContainer',
-            distance: -10000
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: 'karaokeText',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
           }
         ]
       })

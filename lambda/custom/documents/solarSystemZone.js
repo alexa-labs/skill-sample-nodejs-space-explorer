@@ -38,11 +38,11 @@ module.exports = zone => {
       import: [
         {
           name: 'alexa-styles',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'alexa-layouts',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'layouts',
@@ -58,8 +58,8 @@ module.exports = zone => {
       mainTemplate: {
         parameters: ['payload'],
         item: {
-          type: 'ZoneList',
-          backgroundImage: '${payload.data.backgroundImage}',
+          type: 'ImageList',
+          backgroundImage: '${payload.data.properties.backgroundImage}',
           title: `${zone.toUpperCase()} SOLAR SYSTEM`,
           hintText: '${payload.data.properties.hint}',
           listData: '${payload.data.properties.planets}'
@@ -69,9 +69,9 @@ module.exports = zone => {
     datasources: {
       data: {
         type: 'object',
-        backgroundImage: planetData.backgroundImage,
         properties: {
           planets,
+          backgroundImage: planetData.backgroundImage,
           hintText: 'take me to Venus.'
         },
         transformers: [

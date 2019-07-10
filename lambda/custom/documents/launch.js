@@ -37,11 +37,11 @@ module.exports = () => {
       import: [
         {
           name: 'alexa-styles',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'alexa-layouts',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'layouts',
@@ -56,36 +56,59 @@ module.exports = () => {
       ],
       resources: [
         {
-          when: '${viewport.width > 1280}',
           strings: {
-            landingImage: 'https://d1od0khoye9qi3.cloudfront.net/assets/landing_1920_1080.jpg'
-          }
-        },
-        {
-          when: '${viewport.width > 1024}',
-          strings: {
-            landingImage: 'https://d1od0khoye9qi3.cloudfront.net/assets/landing_1280_800.jpg'
-          }
-        },
-        {
-          when: '${viewport.width > 480}',
-          strings: {
-            landingImage: 'https://d1od0khoye9qi3.cloudfront.net/assets/landing_1024_600.jpg'
-          }
-        },
-        {
-          when: '${viewport.width <= 480}',
-          strings: {
-            landingImage: 'https://d1od0khoye9qi3.cloudfront.net/assets/landing_480_480.jpg'
+            videoLandingVideo: `${cdnPath}videos/SpaceExplorer_Splash_v2.mp4`
           }
         },
         {
           strings: {
-            videoLandingImage: 'https://d1od0khoye9qi3.cloudfront.net/video_splash.jpg',
-            videoLandingVideo: 'https://d1od0khoye9qi3.cloudfront.net/videos/SpaceExplorer_Splash_v2.mp4'
+            when: '${@viewportProfile == @hubRoundSmall || viewport.height <= 480}',
+            videoLandingVideo: `${cdnPath}videos/SpaceExplorer_Splash_480.mp4`
           }
         }
       ],
+      commands: {
+        Reveal: {
+          parameters: [],
+          command: {
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'Parallel',
+                commands: [
+                  {
+                    type: 'AnimateItem',
+                    componentId: 'solarSystem',
+                    value: [
+                      {
+                        property: 'opacity',
+                        from: 0,
+                        to: 1
+                      }
+                    ],
+                    duration: 1000
+                  },
+                  {
+                    type: 'AnimateItem',
+                    componentId: 'videoContainer',
+                    value: [
+                      {
+                        property: 'opacity',
+                        from: 1,
+                        to: 0
+                      }
+                    ],
+                    duration: 1000
+                  },
+                  {
+                    type: 'SolarSystemReveal'
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
       mainTemplate: {
         parameters: ['payload'],
         item: {
@@ -98,30 +121,37 @@ module.exports = () => {
           bottom: 0,
           items: [
             {
-              type: 'ScrollView',
-              width: '100%',
-              height: '100%',
+              type: 'Container',
+              id: 'videoContainer',
               position: 'absolute',
-              onScroll: [
-                {
-                  type: 'SetValue',
-                  componentId: 'splashImage',
-                  property: 'opacity',
-                  value: '${1 - (event.source.value * 2)}'
-                }
-              ],
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              opacity: 1,
               item: [
+                { 
+                  type: 'Frame',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'red',
+                  position: 'absolute'
+                },
                 {
-                  type: 'Container',
-                  paddingTop: '100vh',
-                  items: [
+                  type: 'Video',
+                  id: 'splashVideo',
+                  width: '${@viewportProfile == @hubLandscapeSmall ? \'200vh\' : \'180vh\'}',
+                  height: '100vh',
+                  scale: 'best-fill',
+                  position: 'absolute',
+                  autoplay: true,
+                  audioTrack: 'foreground',
+                  source: '@videoLandingVideo',
+                  onEnd: [
                     {
-                      type: 'Text',
-                      text: 'What would you like to explore?',
-                      opacity: '0',
-                      id: 'splashScroller',
-                      paddingTop: '100vh',
-                      speech: '${payload.data.properties.speech}'
+                      type: 'Reveal'
                     }
                   ]
                 }
@@ -129,6 +159,8 @@ module.exports = () => {
             },
             {
               type: 'Container',
+              id: 'solarSystem',
+              opacity: 0,
               items: [
                 {
                   when: '${@viewportProfile == @hubRoundSmall}',
@@ -138,74 +170,8 @@ module.exports = () => {
                 {
                   when: '${@viewportProfile != @hubRoundSmall}',
                   type: 'SolarSystem',
-                  data: '${payload.data.properties.data}'
-                }
-              ]
-            },
-            {
-              type: 'Frame',
-              id: 'splashImage',
-              backgroundColor: 'black',
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              item: [
-                {
-                  type: 'Container',
-                  width: '100vw',
-                  height: '100vh',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  items: [
-                    {
-                      type: 'Image',
-                      id: 'splashImageImage',
-                      width: '100vw',
-                      height: '100vh',
-                      scale: 'best-fill',
-                      source: '@videoLandingImage',
-                      position: 'absolute',
-                      opacity: 0
-                    },
-                    {
-                      type: 'Video',
-                      id: 'splashVideo',
-                      width: '180vh',
-                      height: '100vh',
-                      scale: 'best-fill',
-                      position: 'absolute',
-                      autoplay: true,
-                      audioTrack: 'foreground',
-                      source: '@videoLandingVideo',
-                      onEnd: [
-                        {
-                          type: 'Parallel',
-                          commands: [
-                            {
-                              type: 'SetValue',
-                              componentId: 'splashVideo',
-                              property: 'opacity',
-                              value: 0
-                            },
-                            {
-                              type: 'SetValue',
-                              componentId: 'splashImageImage',
-                              property: 'opacity',
-                              value: 1
-                            },
-                            {
-                              type: 'SendEvent',
-                              arguments: [
-                                'launchVideoEnded'
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
+                  data: '${payload.data.properties.data}',
+                  hintText: '${payloaddata.properties.hint}'
                 }
               ]
             }

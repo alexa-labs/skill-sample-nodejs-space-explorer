@@ -26,11 +26,11 @@ module.exports = () => ({
     import: [
       {
         name: 'alexa-styles',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'alexa-layouts',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'layouts',
@@ -48,6 +48,11 @@ module.exports = () => ({
       item: {
         type: 'Frame',
         backgroundColor: 'black',
+        onMount: [
+          {
+            type: 'SolarSystemReveal'
+          }
+        ],
         items: [
           {
             when: '${@viewportProfile == @hubRoundSmall}',
@@ -57,7 +62,8 @@ module.exports = () => ({
           {
             when: '${@viewportProfile != @hubRoundSmall}',
             type: 'SolarSystem',
-            data: '${payload.data.properties.data}'
+            data: '${payload.data.properties.data}',
+            hintText: '${payloaddata.properties.hint}'
           }
         ]
       }

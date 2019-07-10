@@ -18,29 +18,6 @@ const cdnPath = require('../helpers/cdn-path');
 
 module.exports = planet => {
   const datasource = data[planet];
-  const imagePreloads = [];
-
-  data[planet].satellites.interesting.forEach(item => {
-    imagePreloads.push({
-      type: 'Image',
-      height: 0,
-      width: 0,
-      position: 'absolute',
-      zIndex: 0,
-      opacity: 0,
-      source: item.image
-    });
-  });
-
-  imagePreloads.push({
-    type: 'Image',
-    height: 0,
-    width: 0,
-    position: 'absolute',
-    zIndex: 0,
-    opacity: 0,
-    source: data[planet].atmosphereImage
-  });
 
   return {
     type: 'Alexa.Presentation.APL.RenderDocument',
@@ -50,10 +27,119 @@ module.exports = planet => {
       version: '1.0',
       theme: 'dark',
       import: [
-        { name: 'alexa-styles', version: '1.0.0-beta' },
-        { name: 'alexa-layouts', version: '1.0.0-beta' },
-        { name: 'layouts', version: '1.0.0', source: `${cdnPath}apl/layouts.json` },
-        { name: 'styles', version: '1.0.0', source: `${cdnPath}apl/styles.json` }
+        {
+          name: 'alexa-styles',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
+        },
+        {
+          name: 'alexa-layouts',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
+        },
+        {
+          name: 'layouts',
+          version: '1.0.0',
+          source: `${cdnPath}apl/layouts.json`
+        },
+        {
+          name: 'styles',
+          version: '1.0.0',
+          source: `${cdnPath}apl/styles.json`
+        },
+        {
+          name: 'soft-stagger',
+          version: '1.0.0',
+          source: `${cdnPath}apl/soft-stagger.json`
+        }
+      ],
+      commands: {
+        onMount: {
+          command: {
+            type: 'Parallel',
+            commands: [
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'background'
+              },
+              {
+                type: 'AnimateItem',
+                componentId: 'planetImage',
+                duration: 1000,
+                easing: '@alexa-out',
+                value: [
+                  {
+                    property: 'transform',
+                    from: [
+                      {
+                        translateX: 100
+                      }
+                    ],
+                    to: [
+                      {
+                        translateX: 0
+                      }
+                    ]
+                  },
+                  {
+                    property: 'opacity',
+                    from: 0,
+                    to: 1
+                  }
+                ]
+              },
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'listContainer'
+              },
+              {
+                type: 'SoftStaggerChromeTargetted',
+                componentId: 'header',
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerHintTargetted',
+                componentId: 'footer',
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                when: planet === 'the sun',
+                componentId: 'starType',
+                order: 1,
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                when: planet === 'the sun',
+                componentId: 'starAge',
+                order: 2,
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                when: `\${@viewportProfile == @tvLandscapeXLarge && '${planet}' != 'the sun'}`,
+                componentId: 'yearLength',
+                order: 1,
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                when: `\${@viewportProfile == @tvLandscapeXLarge && '${planet}' != 'the sun'}`,
+                componentId: 'dayLength',
+                order: 2,
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'PlanetListReveal',
+                planet: planet
+              }
+            ]
+          }
+        }
+      },
+      onMount: [
+        {
+          type: 'onMount'
+        }
       ],
       mainTemplate: {
         parameters: ['payload'],
@@ -61,51 +147,6 @@ module.exports = planet => {
           type: 'Frame',
           backgroundColor: 'black',
           item: [
-            {
-              when: '${@viewportProfile == @hubRoundSmall}',
-              type: 'Container',
-              direction: 'column',
-              height: '100%',
-              width: '100%',
-              items: [
-                ...imagePreloads,
-                {
-                  type: 'Image',
-                  source: '${payload.data.image}',
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  scale: 'best-fit'
-                },
-                {
-                  type: 'Image',
-                  source: 'https://s3-us-west-2.amazonaws.com/ddg-skill/assets/rook-full-scrim.png',
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  scale: 'best-fit'
-                },
-                {
-                  type: 'Container',
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  item: {
-                    type: 'AlexaHeader',
-                    headerTitle: planet.toUpperCase(),
-                    headerAttributionPrimacy: false
-                  }
-                },
-                {
-                  type: 'Container',
-                  paddingLeft: '@marginLeft',
-                  paddingRight: '@marginRight',
-                  paddingTop: '25vh',
-                  height: '100%',
-                  items: [{ type: 'PlanetDetailsList', planet: planet.toLowerCase() }]
-                }
-              ]
-            },
             {
               when: '${@viewportProfile != @hubRoundSmall}',
               type: 'Container',
@@ -115,27 +156,26 @@ module.exports = planet => {
               width: '100%',
               items: [
                 {
-                  type: 'Image',
-                  source: '${payload.data.backgroundImage}',
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  scale: 'best-fill'
+                  type: 'AlexaBackground',
+                  id: 'background',
+                  backgroundImageSource: '${payload.data.backgroundImage}',
+                  opacity: 0
                 },
                 {
                   type: 'Image',
+                  id: 'planetImage',
                   source: '${payload.data.image}',
                   left: planet === 'saturn' ? '-20%' : '42%',
                   bottom: planet === 'saturn' ? '-30%' : '20%',
                   width: planet === 'saturn' ? '200%' : '100%',
                   height: planet === 'saturn' ? '200%' : '100%',
                   position: 'absolute',
-                  scale: 'best-fit'
+                  scale: 'best-fit',
+                  opacity: 0
                 },
                 {
                   type: 'Image',
-                  source:
-                    'https://s3-us-west-2.amazonaws.com/ddg-skill/assets/scrim-planetdetails.png',
+                  source: `${cdnPath}assets/scrim-planetdetails.png`,
                   right: 0,
                   bottom: 0,
                   height: '100vh',
@@ -145,17 +185,46 @@ module.exports = planet => {
                 },
                 {
                   type: 'AlexaHeader',
+                  id: 'header',
                   headerTitle: planet.toUpperCase(),
-                  headerBackButton: 1,
-                  headerNavigationAction: 'backEvent'
+                  headerBackButton: true,
+                  width: '100%',
+                  opacity: 0
                 },
                 {
                   type: 'Container',
-                  paddingLeft: '@marginLeft',
+                  id: 'listContainer',
+                  paddingLeft: '@marginHorizontal',
                   grow: 1,
                   shrink: 1,
+                  opacity: 0,
                   items: [
-                    { type: 'PlanetDetailsList', planet: planet.toLowerCase() },
+                    {
+                      type: 'PlanetDetailsList',
+                      planet: planet.toLowerCase()
+                    },
+                    {
+                      when: '${@viewportProfile == @hubLandscapeSmall}',
+                      type: 'Image',
+                      height: 120,
+                      width: '100%',
+                      scale: 'best-fill',
+                      position: 'absolute',
+                      left: 0,
+                      bottom: 0,
+                      source: 'https://ddg-skill.s3-us-west-2.amazonaws.com/1px.png',
+                      overlayGradient: {
+                        type: 'linear',
+                        colorRange: [
+                          'black',
+                          'transparent'
+                        ],
+                        inputRange: [
+                          0,
+                          0.4
+                        ]
+                      }
+                    },
                     {
                       when: planet === 'the sun',
                       type: 'Container',
@@ -164,6 +233,7 @@ module.exports = planet => {
                       items: [
                         {
                           type: 'Container',
+                          id: 'starType',
                           spacing: '68dp',
                           items: [
                             {
@@ -177,6 +247,7 @@ module.exports = planet => {
                         },
                         {
                           type: 'Container',
+                          id: 'starAge',
                           spacing: '68dp',
                           items: [
                             {
@@ -198,6 +269,7 @@ module.exports = planet => {
                       items: [
                         {
                           type: 'Container',
+                          id: 'yearLength',
                           spacing: '68dp',
                           items: [
                             {
@@ -215,6 +287,7 @@ module.exports = planet => {
                         },
                         {
                           type: 'Container',
+                          id: 'dayLength',
                           spacing: '68dp',
                           items: [
                             {
@@ -235,17 +308,62 @@ module.exports = planet => {
                   ]
                 },
                 {
+                  when: '${@viewportProfile != @hubLandscapeSmall}',
                   type: 'AlexaFooter',
-                  when:
-                    '${(@viewportProfile == @hubLandscapeMedium && viewport.height > 600) || @viewportProfile != @hubLandscapeMedium}',
-                  hintText: '${payload.data.properties.hint}'
+                  id: 'footer',
+                  hintText: '${payload.data.properties.hint}',
+                  opacity: 0
+                }
+              ]
+            },
+            {
+              when: '${@viewportProfile == @hubRoundSmall}',
+              type: 'Container',
+              direction: 'column',
+              height: '100%',
+              width: '100%',
+              items: [
+                {
+                  type: 'Image',
+                  id: 'planetImage',
+                  source: '${payload.data.image}',
+                  width: '100%',
+                  height: '100%',
+                  position: 'absolute',
+                  scale: 'best-fit',
+                  opacity: 0
+                },
+                {
+                  type: 'Image',
+                  source: `${cdnPath}assets/rook-full-scrim.png`,
+                  width: '100%',
+                  height: '100%',
+                  position: 'absolute',
+                  scale: 'best-fit'
+                },
+                {
+                  type: 'AlexaHeader',
+                  id: 'header',
+                  headerTitle: planet.toUpperCase(),
+                  headerAttributionPrimacy: false,
+                  position: 'absolute',
+                  width: '100%',
+                  opacity: 0
                 },
                 {
                   type: 'Container',
-                  position: 'absolute',
-                  top: '200vh',
+                  id: 'listContainer',
+                  paddingLeft: '@marginHorizontal',
+                  paddingRight: '${@marginHorizontal / 2}',
+                  paddingTop: '25vh',
+                  height: '100%',
                   opacity: 0,
-                  items: imagePreloads
+                  items: [
+                    {
+                      type: 'PlanetDetailsList',
+                      planet: planet.toLowerCase()
+                    }
+                  ]
                 }
               ]
             }

@@ -16,7 +16,7 @@ This is a full-screen image behind a title and source attributions, with text pe
 
 ## Layout
 
-- [/lambda/custom/documents/transcript.js](../lambda/custom/documents/transcript.js)
+- [/lambda/custom/documents/transcript_V2.js](../lambda/custom/documents/transcript_V2.js)
 
 ## External Packages Used
 

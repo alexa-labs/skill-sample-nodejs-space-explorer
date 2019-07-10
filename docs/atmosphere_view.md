@@ -6,6 +6,10 @@
 
 Shown when the user requests information about a planet's atmosphere. Using periodic-table-esque graphics to represent atmospheric elements and text to describe actual percentages. The layout changes drastically on larger screens.
 
+### Updates
+
+Staggered animations were added that uses the document's `onMount` field to trigger when the page loads. The PNGs used in the TV views were replaced with Alexa Vector Graphics.
+
 ### Layout Notes
 
 New layouts were created for the element tiles on hubs, using `Frames`, `Text` and `Images` to achieve the design. Text is styled using the alexa-styles package.
