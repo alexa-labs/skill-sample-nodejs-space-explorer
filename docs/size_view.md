@@ -8,7 +8,7 @@ This is a comparison view for planet size. `Text` callouts feature relevant info
 
 ### Updates
 
-Staggered animations were added that uses the document's `onMount` field to trigger when the page loads and the comparative size graphics were animated to scale in.
+Staggered animations were added that use the document's `onMount` field to trigger when the page loads, and the comparative size graphics were animated to scale in.
 
 ### Layout Notes
 

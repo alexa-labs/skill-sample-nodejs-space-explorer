@@ -8,7 +8,7 @@ Shown when the user requests information about a planet's atmosphere. Using peri
 
 ### Updates
 
-Staggered animations were added that uses the document's `onMount` field to trigger when the page loads. The PNGs used in the TV views were replaced with Alexa Vector Graphics.
+Staggered animations were added that use the document's `onMount` field to trigger when the page loads. The PNGs used in the TV views were replaced with Alexa Vector Graphics.
 
 ### Layout Notes
 

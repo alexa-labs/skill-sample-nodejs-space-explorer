@@ -10,7 +10,7 @@ This view uses Images to render each of the planets. Each planet is wrapped with
 
 ### Updates
 
-Staggered animations were added that uses the document's `onMount` field to trigger when the page loads.
+Staggered animations were added that use the document's `onMount` field to trigger when the page loads.
 
 ### Layout Notes
 

@@ -8,7 +8,7 @@ Each time a user navigates to a planet, we display a Planet Details view that gu
 
 ### Updates
 
-Staggered animations were added that uses the document's `onMount` field to trigger when the page loads.
+Staggered animations were added that use the document's `onMount` field to trigger when the page loads.
 
 ### Layout Notes
 
