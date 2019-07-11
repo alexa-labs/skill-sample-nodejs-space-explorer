@@ -17,7 +17,7 @@ const TranscriptDirective = require('../documents/transcript');
 
 const data = require('../data/planets.json');
 
-module.exports = (handlerInput, shouldSpeak = true) => {
+module.exports = (handlerInput, speak = true) => {
   const moon = data.earth.satellites.interesting[0];
 
   const attributes = handlerInput.attributesManager.getSessionAttributes();
@@ -51,15 +51,20 @@ module.exports = (handlerInput, shouldSpeak = true) => {
         token: 'transcript_document',
         commands: [
           {
-            type: 'SpeakItem',
-            componentId: shouldSpeak ? 'imageText' : 'doNothing',
-            highlightMode: 'line',
-            align: 'center'
-          },
-          {
-            type: 'Scroll',
-            componentId: 'scrollContainer',
-            distance: -10000
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: speak ? 'karaokeText' : 'doNothing',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
           }
         ]
       })

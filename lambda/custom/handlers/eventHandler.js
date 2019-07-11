@@ -35,6 +35,24 @@ const EventHandler = {
     const data = args[1];
 
     switch (event) {
+      case 'transcriptMediaEndedEvent':
+        return handlerInput.responseBuilder
+          .addDirective({
+            type: 'Alexa.Presentation.APL.ExecuteCommands',
+            token: 'transcript_document',
+            commands: [
+              {
+                type: "ControlMedia",
+                componentId: "myAudioPlayer",
+                command: "rewind"
+              },
+              {
+                type: "ControlMedia",
+                componentId: "videoPlayer",
+                command: "play"
+              }  
+            ]
+          }).getResponse();
       case 'startEvent':
         return SolarSystemResponse(handlerInput);
       case 'exploreEvent':

@@ -4,6 +4,27 @@
 
 Alexa Presentation Language (APL) gives developers the ability to create rich, engaging and unique visual experiences for users. This skill is meant to be an example of how to use the language, the capabilities of APL, and how to think about and develop true, multi-modal experiences for Alexa-enabled devices with a screen.
 
+## APL 1.1 Release Updates
+
+With the release of APL 1.1, Space Explorer includes updates to demonstrate new features, including:
+
+- Video
+- Animations
+- Alexa Vector Graphics (AVG)
+- Alexa Responsive Layouts
+
+### Animations
+
+The new animation package allows you to apply the same animation framework across all pages. This drastically reduces the amount of code written, allows parameterization of custom animations, and maintains a consistent feel across the skill. See [soft-stagger.json](packages/soft-stagger.json) for the code behind how this is achieved.
+
+### AVG
+
+Because of the dynamic nature of APL responses, vector graphics for the atmosphere data on larger screens are served with a new graphics package. See [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
+
+### Alexa Responsive Layouts
+
+Alexa Responsive Layouts are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these simplifies the code and conditional statements throughout the skill. It also alleviates the need to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
+
 ## Quicklinks
 
 - [Tenets](#design-tenets)
@@ -65,7 +86,7 @@ Once you've arrived at a planet, you can learn more about it by saying:
 
 ### Astronomy Pictures
 
-You can view a random image from the Astronomy Picture of the Day archives by saying:
+You can view a random image from NASA's Astronomy Picture of the Day archives by saying:
 
 - _Alexa, show me a random image._
 - _Alexa, show me a space image._

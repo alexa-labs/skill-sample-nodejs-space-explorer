@@ -44,6 +44,6 @@ Focus states allow users to visually identify targets. Pressed states provide fe
 
 Pressed states provide feedback for interactions.
 
-### **Small Hubs**
+### **Small Round Hubs**
 
 The horizontal list is converted to a Pager with full-screen TouchWrappers and images. This is the same pattern used by the solar system view.

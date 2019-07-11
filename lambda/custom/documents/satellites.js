@@ -33,11 +33,11 @@ module.exports = planet => ({
     import: [
       {
         name: 'alexa-styles',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'alexa-layouts',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'layouts',
@@ -50,26 +50,39 @@ module.exports = planet => ({
         source: `${cdnPath}apl/styles.json`
       }
     ],
-    features: {
-      idleTimeout: 60000
-    },
     mainTemplate: {
       parameters: ['payload'],
       item: {
-        type: 'MoonList',
-        backgroundImage: '${payload.data.backgroundImage}',
+        type: 'ImageList',
+        backgroundImage: '${payload.data.properties.backgroundImage}',
         hintText: '${payload.data.properties.hint}',
-        listData: '${payload.data.listItems}',
-        planet: capitalize(planet)
+        listData: '${payload.data.properties.listItems}',
+        planet: capitalize(planet),
+        title: `${planet.toUpperCase()} • MOONS`,
+        opacity: 0,
+        onMount: [
+          {
+            type: 'AnimateItem',
+            duration: 500,
+            easing: 'linear',
+            value: [
+              {
+                property: 'opacity',
+                from: 0,
+                to: 1
+              }
+            ]
+          }
+        ]
       }
     }
   },
   datasources: {
     data: {
       type: 'object',
-      backgroundImage: data.backgroundImage,
-      listItems: data[planet].satellites.interesting,
       properties: {
+        backgroundImage: data.backgroundImage,
+        listItems: data[planet].satellites.interesting,
         hintText: 'how many moons does Venus have?'
       },
       transformers: [

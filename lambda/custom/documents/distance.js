@@ -27,26 +27,21 @@ module.exports = (planet1, planet2) => {
   Object.keys(planetData).forEach(k => {
     if (k !== 'the sun' && k !== 'backgroundImage') {
       const item = planetData[k];
+      let itemWidth = Math.min(
+        (item.distance / planetData[planet1 === 'pluto' || planet2 === 'pluto' ? 'pluto' : 'neptune'].distance) * 100 + 3,
+        100
+      );
 
       if (k !== 'pluto' || ((planet1 === 'pluto' || planet2 === 'pluto') && k === 'pluto')) {
         elements.push({
-          when: `\${@viewportProfile != @hubLandscapeMedium || ${k === planet1 ||
-            k === planet2 ||
-            (planets.indexOf(k) === planets.indexOf(planet1) + 1 ||
-              planets.indexOf(k) === planets.indexOf(planet1) - 1)}}`,
+          when: `\${(@viewportProfile != @hubLandscapeMedium && @viewportProfile != @hubLandscapeSmall) || ${(k === planet1 || k === planet2) || (planets.indexOf(k) === planets.indexOf(planet1) + 1 || planets.indexOf(k) === planets.indexOf(planet1) - 1)}}`,
           type: 'DistanceGraphic',
+          id: `distance_${k}`,
           color: item.color,
-          width: Math.min(
-            (item.distance /
-              planetData[planet1 === 'pluto' || planet2 === 'pluto' ? 'pluto' : 'neptune']
-                .distance) *
-              100 +
-              3,
-            100
-          ),
+          width: Math.round(itemWidth),
           name: k,
           active: k === planet1 || k === planet2
-        });
+        })
       }
     }
   });
@@ -55,18 +50,18 @@ module.exports = (planet1, planet2) => {
 
   return {
     type: 'Alexa.Presentation.APL.RenderDocument',
-    token: 'atmospheric-composition',
+    token: 'distance',
     document: {
       type: 'APL',
       version: '1.0',
       import: [
         {
           name: 'alexa-styles',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'alexa-layouts',
-          version: '1.0.0-beta'
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'layouts',
@@ -77,11 +72,111 @@ module.exports = (planet1, planet2) => {
           name: 'styles',
           version: '1.0.0',
           source: `${cdnPath}apl/styles.json`
+        },
+        {
+          name: 'soft-stagger',
+          version: '1.0.0',
+          source: `${cdnPath}apl/soft-stagger.json`
         }
       ],
-      features: {
-        idleTimeout: 60000
+      commands: {
+        DistanceReveal: {
+          parameters: [ 'componentId' ],
+          command: {
+            type: 'AnimateItem',
+            componentId: '${componentId}',
+            easing: '@alexa-out',
+            delay: 250,
+            duration: '${10 * width}',
+            value: [
+              {
+                property: 'transform',
+                from: {
+                  translateX: '-100%'
+                },
+                to: {
+                  translateX: '0%'
+                }
+              }
+            ]
+          } 
+        },
+        onLoad: {
+          parameters: [],
+          command: {
+            type: 'Parallel',
+            commands: [
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'background'
+              },
+              {
+                type: 'SoftStaggerChromeTargetted',
+                componentId: 'header',
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerHintTargetted',
+                componentId: 'footer',
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                componentId: 'distanceText',
+                fromDirection: 'bottom',
+                order: 1
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                componentId: 'sunlightText',
+                fromDirection: 'bottom',
+                order: 2
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_mercury'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_venus'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_earth'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_mars'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_jupiter'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_saturn'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_uranus'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_neptune'
+              },
+              {
+                type: 'DistanceReveal',
+                componentId: 'distance_pluto'
+              }
+            ]
+          }
+        }
       },
+      onMount: [
+        {
+          type: 'onLoad'
+        }
+      ],
       mainTemplate: {
         parameters: ['payload'],
         item: {
@@ -98,31 +193,27 @@ module.exports = (planet1, planet2) => {
               justifyContent: 'center',
               items: [
                 {
+                  type: 'AlexaBackground',
+                  backgroundImageSource: '${payload.data.properties.planetData.backgroundImage}'
+                },
+                {
                   type: 'Image',
-                  source: planetData[planet1].image,
+                  source: `${cdnPath}assets/rook-full-scrim.png`,
                   width: '100%',
                   height: '100%',
                   position: 'absolute',
                   scale: 'best-fit'
                 },
                 {
-                  type: 'Image',
-                  source: 'https://s3-us-west-2.amazonaws.com/ddg-skill/assets/rook-full-scrim.png',
+                  type: 'AlexaHeader',
+                  id: 'header',
+                  headerTitle: 'DISTANCE',
+                  headerAttributionPrimacy: false,
                   width: '100%',
-                  height: '100%',
                   position: 'absolute',
-                  scale: 'best-fit'
-                },
-                {
-                  type: 'Container',
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  item: {
-                    type: 'AlexaHeader',
-                    headerTitle: 'DISTANCE',
-                    headerAttributionPrimacy: false
-                  }
+                  top: 0,
+                  left: 0,
+                  opacity: 0
                 },
                 {
                   type: 'Container',
@@ -134,12 +225,14 @@ module.exports = (planet1, planet2) => {
                   items: [
                     {
                       type: 'Container',
+                      id: 'distanceText',
                       direction: 'column',
                       alignItems: 'center',
+                      opacity: 0,
                       items: [
                         {
                           type: 'Text',
-                          style: 'textStyleLabel',
+                          style: 'textStyleCallout',
                           spacing: 10,
                           opacity: 0.6,
                           text: `DISTANCE FROM ${planet2.toUpperCase()}`
@@ -162,18 +255,18 @@ module.exports = (planet1, planet2) => {
               height: '100%',
               items: [
                 {
-                  type: 'Image',
-                  position: 'absolute',
-                  width: '100vw',
-                  height: '100vh',
-                  scale: 'best-fill',
-                  source: planetData.backgroundImage
+                  type: 'AlexaBackground',
+                  id: 'background',
+                  backgroundImageSource: planetData.backgroundImage,
+                  opacity: 0
                 },
                 {
                   type: 'AlexaHeader',
                   headerTitle: `${planet1.toUpperCase()} · DISTANCE`,
-                  headerBackButton: 1,
-                  headerNavigationAction: 'backEvent'
+                  headerBackButton: true,
+                  headerNavigationAction: 'backEvent',
+                  id: 'header',
+                  opacity: 0
                 },
                 {
                   type: 'Container',
@@ -187,17 +280,18 @@ module.exports = (planet1, planet2) => {
                     {
                       type: 'Container',
                       direction: 'row',
-                      // "paddingTop": "20dp",
                       width: '100%',
                       alignItems: 'center',
                       spacing: '48dp',
                       items: [
                         {
                           type: 'Container',
+                          id: 'distanceText',
+                          opacity: 0,
                           items: [
                             {
                               type: 'Text',
-                              style: 'textStyleDetail',
+                              style: 'textStyleCallout',
                               opacity: 0.6,
                               text: `DISTANCE FROM ${planet2.toUpperCase()}`
                             },
@@ -209,20 +303,22 @@ module.exports = (planet1, planet2) => {
                           ]
                         },
                         {
-                          when: `\${((@viewportProfile == @hubLandscapeMedium && viewport.height > 600) || @viewportProfile != @hubLandscapeMedium) && ${planet2 ===
+                          when: `\${viewport.height > 600 && ${planet2 ===
                             'the sun'}}`,
                           type: 'Container',
-                          spacing: '48dp',
+                          spacing: '68dp',
+                          id: 'sunlightText',
+                          opacity: 0,
                           items: [
                             {
                               type: 'Text',
-                              style: 'textStyleDetail',
+                              style: '${@viewportProfileCategory == @tvLandscape ? \'textStyleBody\' : \'textStyleCallout\'}',
                               opacity: 0.6,
                               text: 'SUNLIGHT TO TRAVEL'
                             },
                             {
                               type: 'Text',
-                              style: 'textStyleDisplay4',
+                              style: '${@viewportProfileCategory == @tvLandscape ? \'textStyleDisplay2\' : \'textStyleDisplay4\'}',
                               text: `\${payload.data.properties.planetData['${planet1}'].lightTravel + ' minutes'}`
                             }
                           ]
@@ -233,6 +329,8 @@ module.exports = (planet1, planet2) => {
                 },
                 {
                   type: 'AlexaFooter',
+                  id: 'footer',
+                  opacity: 0,
                   hintText: '${payload.data.properties.hint}'
                 }
               ]

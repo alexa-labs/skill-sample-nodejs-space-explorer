@@ -23,7 +23,20 @@ module.exports = handlerInput => {
   const previous = sA.previousLocation;
   let directive;
 
-  if (previous.length) {
+  // if (!previous) {
+  //   handlerInput.attributesManager.setSessionAttributes({
+  //     previousLocation: [],
+  //     location: 'solar system'
+  //   });
+
+  //   if (handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL']) {
+  //     return handlerInput.responseBuilder.addDirective(solarSystemDirective()).getResponse();
+  //   } else {
+      
+  //   }
+  // }
+
+  if (previous && previous.length) {
     const loc = previous.pop();
     let cleanedLoc = loc;
 

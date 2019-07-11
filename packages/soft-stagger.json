@@ -1,0 +1,480 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "import": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Default translation distances, stagger, and timing",
+            "numbers": {
+                "translateDistance": 40,
+                "stagger": 50,
+                "itemDuration": 666
+            }
+        },
+        {
+            "description": "Small hub translation distances, stagger, and timing",
+            "when": "${@viewportProfile == @hubRoundSmall || @viewportProfile == @hubLandscapeSmall}",
+            "numbers": {
+                "translateDistance": 20,
+                "stagger": 67,
+                "itemDuration": 500
+            }
+        },
+        {
+            "description": "Easing curves for Alexa",
+            "strings": {
+                "alexa-out": "cubic-bezier(0.000, 0.600, 0.400, 1.000)",
+                "alexa-in-out": "cubic-bezier(0.333, 0.000, 0.666, 1.000)"
+            }
+        }
+    ],
+    "commands": {
+        "HorizontalBase": {
+            "parameters": [
+                {
+                    "name": "fromDirection",
+                    "description": "Offscreen direction the element starts from",
+                    "type": "string",
+                    "default": "right"
+                },
+                {
+                    "name": "easing",
+                    "description": "Easing function to use",
+                    "default": "linear"
+                },
+                {
+                    "name": "duration",
+                    "description": "Duration of the animation",
+                    "type": "number",
+                    "default": "@itemDuration"
+                },
+                {
+                    "name": "delay",
+                    "description": "How long to wait before starting animation",
+                    "type": "number",
+                    "default": 0
+                }
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "easing": "${easing}",
+                "duration": "${duration}",
+                "delay": "${delay}",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    },
+                    {
+                        "when": "${fromDirection == 'left' || fromDirection == 'right'}",
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": "${fromDirection == 'right' ? @translateDistance : @translateDistance * -1}"
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "VerticalBase": {
+            "parameters": [
+                {
+                    "name": "fromDirection",
+                    "description": "Offscreen direction the element starts from",
+                    "type": "string",
+                    "default": "bottom"
+                },
+                {
+                    "name": "easing",
+                    "description": "Easing function to use",
+                    "default": "linear"
+                },
+                {
+                    "name": "duration",
+                    "description": "Duration of the animation",
+                    "type": "number",
+                    "default": "@itemDuration"
+                },
+                {
+                    "name": "delay",
+                    "description": "How long to wait before starting animation",
+                    "type": "number",
+                    "default": 0
+                }
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "easing": "${easing}",
+                "duration": "${duration}",
+                "delay": "${delay}",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    },
+                    {
+                        "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateY": "${fromDirection == 'bottom' ? @translateDistance : @translateDistance * -1}"
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateY": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "HorizontalBaseTargetted": {
+            "parameters": [
+                {
+                    "name": "fromDirection",
+                    "description": "Offscreen direction the element starts from",
+                    "type": "string",
+                    "default": "right"
+                },
+                {
+                    "name": "componentId",
+                    "description": "Target component's id property",
+                    "type": "string"
+                },
+                {
+                    "name": "easing",
+                    "description": "Easing function to use",
+                    "default": "linear"
+                },
+                {
+                    "name": "duration",
+                    "description": "Duration of the animation",
+                    "type": "number",
+                    "default": "@itemDuration"
+                },
+                {
+                    "name": "delay",
+                    "description": "How long to wait before starting animation",
+                    "type": "number",
+                    "default": 0
+                }
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "componentId": "${componentId}",
+                "easing": "${easing}",
+                "duration": "${duration}",
+                "delay": "${delay}",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    },
+                    {
+                        "when": "${fromDirection == 'left' || fromDirection == 'right'}",
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": "${fromDirection == 'right' ? @translateDistance : @translateDistance * -1}"
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "VerticalBaseTargetted": {
+            "parameters": [
+                {
+                    "name": "fromDirection",
+                    "description": "Offscreen direction the element starts from",
+                    "type": "string",
+                    "default": "bottom"
+                },
+                {
+                    "name": "componentId",
+                    "description": "Target component's id property",
+                    "type": "string"
+                },
+                {
+                    "name": "easing",
+                    "description": "Easing function to use",
+                    "default": "linear"
+                },
+                {
+                    "name": "duration",
+                    "description": "Duration of the animation",
+                    "type": "number",
+                    "default": "@itemDuration"
+                },
+                {
+                    "name": "delay",
+                    "description": "How long to wait before starting animation",
+                    "type": "number",
+                    "default": 0
+                }
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "componentId": "${componentId}",
+                "easing": "${easing}",
+                "duration": "${duration}",
+                "delay": "${delay}",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    },
+                    {
+                        "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateY": "${fromDirection == 'bottom' ? @translateDistance : @translateDistance * -1}"
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateY": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "SoftStaggerItem": {
+            "parameters": [
+                "fromDirection",
+                {
+                    "name": "order", 
+                    "type": "number"
+                }
+            ],
+            "command": [
+                {
+                    "when": "${fromDirection == 'left' || fromDirection == 'right'}",
+                    "type": "HorizontalBase",
+                    "easing": "@alexa-out",
+                    "duration": "@itemDuration",
+                    "delay": "${order * @stagger}",
+                    "fromDirection": "${fromDirection}"
+                },
+                {
+                    "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                    "type": "VerticalBase",
+                    "easing": "@alexa-out",
+                    "duration": "@itemDuration",
+                    "delay": "${order * @stagger}",
+                    "fromDirection": "${fromDirection}"
+                }
+            ]
+        },
+        "SoftStaggerItemTargetted": {
+            "parameters": [
+                "order",
+                "fromDirection",
+                "componentId"
+            ],
+            "command": [
+                {
+                    "when": "${fromDirection == 'left' || fromDirection == 'right'}",
+                    "type": "HorizontalBaseTargetted",
+                    "componentId": "${componentId}",
+                    "easing": "@alexa-out",
+                    "duration": "@itemDuration",
+                    "delay": "${order * @stagger}",
+                    "fromDirection": "${fromDirection}"
+                },
+                {
+                    "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                    "type": "VerticalBaseTargetted",
+                    "componentId": "${componentId}",
+                    "easing": "@alexa-out",
+                    "duration": "@itemDuration",
+                    "delay": "${order * @stagger}",
+                    "fromDirection": "${fromDirection}"
+                }
+            ]
+        },
+        "SoftStaggerTitle": {
+            "parameters": [
+                "fromDirection",
+                "componentId"
+            ],
+            "command": [
+                {
+                    "when": "${fromDirection == 'left' || fromDirection == 'righ'}",
+                    "type": "HorizontalBase",
+                    "easing": "@alexa-out",
+                    "duration": 417
+                },
+                {
+                    "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                    "type": "VerticalBase",
+                    "easing": "@alexa-out",
+                    "duration": 417
+                }
+            ]
+        },
+        "SoftStaggerTitleTargetted": {
+            "parameters": [
+                "fromDirection",
+                "componentId"
+            ],
+            "command": [
+                {
+                    "when": "${fromDirection == 'left' || fromDirection == 'right'}",
+                    "type": "HorizontalBaseTargetted",
+                    "componentId": "${componentId}",
+                    "easing": "@alexa-out",
+                    "duration": 417
+                },
+                {
+                    "when": "${fromDirection == 'bottom' || fromDirection == 'top'}",
+                    "type": "VerticalBaseTargetted",
+                    "componentId": "${componentId}",
+                    "easing": "@alexa-out",
+                    "duration": 417
+                }
+            ]
+        },
+        "SoftStaggerChrome": {
+            "parameters": [
+                "fromDirection"
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "easing": "linear",
+                "duration": 700,
+                "value": {
+                    "property": "opacity",
+                    "from": 0,
+                    "to": 1
+                }
+            }
+        },
+        "SoftStaggerChromeTargetted": {
+            "parameters": [
+                "fromDirection",
+                "componentId"
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "componentId": "${componentId}",
+                "easing": "linear",
+                "duration": 700,
+                "value": {
+                    "property": "opacity",
+                    "from": 0,
+                    "to": 1
+                }
+            }
+        },
+        "SoftStaggerHint": {
+            "parameters": [
+                "fromDirection"
+            ],
+            "command": {
+                "type": "SoftStaggerChrome"
+            }
+        },
+        "SoftStaggerHintTargetted": {
+            "parameters": [
+                "fromDirection",
+                "componentId"
+            ],
+            "command": {
+                "type": "SoftStaggerChromeTargetted",
+                "componentId": "${componentId}"
+            }
+        },
+        "SoftStaggerBackground": {
+            "parameters": [],
+            "command": {
+                "type": "AnimateItem",
+                "duration": 500,
+                "easing": "@alexa-out",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    }
+                ]
+            }
+        },
+        "SoftStaggerBackgroundTargetted": {
+            "parameters": [
+                "componentId"
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "componentId": "${componentId}",
+                "duration": 500,
+                "easing": "@alexa-out",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "from": 0,
+                        "to": 1
+                    }
+                ]
+            }
+        },
+        "SoftStaggerOut": {
+            "parameters": [],
+            "command": {
+                "type": "AnimateItem",
+                "easing": "linear",
+                "duration": 333,
+                "value": [
+                    {
+                        "property": "opacity",
+                        "to": 0
+                    }
+                ]
+            }
+        },
+        "SoftStaggerOutTargetted": {
+            "parameters": [
+                {
+                    "name": "componentId",
+                    "description": "Target component's id property",
+                    "type": "string"
+                }
+            ],
+            "command": {
+                "type": "AnimateItem",
+                "componentId": "${componentId}",
+                "easing": "linear",
+                "duration": 333,
+                "value": [
+                    {
+                        "property": "opacity",
+                        "to": 0
+                    }
+                ]
+            }
+        }
+    }
+}

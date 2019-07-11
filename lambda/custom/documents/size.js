@@ -38,13 +38,168 @@ module.exports = (planet1, planet2, comparator) => {
       version: '1.0',
       theme: 'dark',
       import: [
-        { name: 'alexa-layouts', version: '1.0.0-beta' },
-        { name: 'alexa-styles', version: '1.0.0-beta' },
-        { name: 'layouts', version: '1.0.0', source: `${cdnPath}apl/layouts.json` },
-        { name: 'styles', version: '1.0.0', source: `${cdnPath}apl/styles.json` }
+        {
+          name: 'alexa-styles',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
+        },
+        {
+          name: 'alexa-layouts',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
+        },
+        {
+          name: 'layouts',
+          version: '1.0.0',
+          source: `${cdnPath}apl/layouts.json`
+        },
+        {
+          name: 'styles',
+          version: '1.0.0',
+          source: `${cdnPath}apl/styles.json`
+        },
+        {
+          name: 'soft-stagger',
+          version: '1.0.0',
+          source: `${cdnPath}apl/soft-stagger.json`
+        }
       ],
-      resources: [{ strings: { fontFamilyRomanSans: 'amazon-ember-display' } }],
-      features: { idleTimeout: 60000 },
+      commands: {
+        planetIn: {
+          parameters: [ 'componentId', 'delay', 'order' ],
+          command: {
+            type: 'AnimateItem',
+            componentId: '${componentId}',
+            delay: '${delay}',
+            duration: 666,
+            easing: '@alexa-in-out',
+            value: [
+              {
+                property: 'opacity',
+                from: 0,
+                to: 1
+              },
+              {
+                property: 'transform',
+                from: [
+                  {
+                    transformY: '${in == \'top\' ? -50% : 50%}'
+                  },
+                  {
+                    scale: 0
+                  }
+                ],
+                to: [
+                  {
+                    transformY: 0
+                  },
+                  {
+                    scale: 1
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        onLoad: {
+          command: {
+            type: 'Parallel',
+            commands: [
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'background'
+              },
+              {
+                type: 'SoftStaggerChromeTargetted',
+                componentId: 'header'
+              },
+              {
+                type: 'SoftStaggerHintTargetted',
+                componentId: 'footer'
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                componentId: 'planetData1',
+                fromDirection: 'bottom',
+                order: 1
+              },
+              {
+                type: 'SoftStaggerItemTargetted',
+                componentId: 'planetData2',
+                fromDirection: 'bottom',
+                order: 2
+              },
+              {
+                type: 'AnimateItem',
+                componentId: 'planetGraphic1',
+                duration: 1000,
+                easing: 'linear',
+                value: [
+                  {
+                    property: 'opacity',
+                    from: 0,
+                    to: 1
+                  },
+                  {
+                    property: 'transform',
+                    from: [
+                      {
+                        translateY: '-50%'
+                      },
+                      {
+                        scale: 0
+                      }
+                    ],
+                    to: [
+                      {
+                        translateY: 0
+                      },
+                      {
+                        scale: 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                type: 'AnimateItem',
+                componentId: 'planetGraphic2',
+                duration: 1000,
+                easing: 'linear',
+                value: [
+                  {
+                    property: 'opacity',
+                    from: 0,
+                    to: 1
+                  },
+                  {
+                    property: 'transform',
+                    from: [
+                      {
+                        translateY: '50%'
+                      },
+                      {
+                        scale: 0
+                      }
+                    ],
+                    to: [
+                      {
+                        translateY: 0
+                      },
+                      {
+                        scale: 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      onMount: [
+        {
+          type: 'onLoad'
+        }
+      ],
       mainTemplate: {
         parameters: ['payload'],
         item: {
@@ -52,57 +207,127 @@ module.exports = (planet1, planet2, comparator) => {
           backgroundColor: 'black',
           items: [
             {
-              when: '${@viewportProfile == @hubRoundSmall}',
               type: 'Container',
               direction: 'column',
               height: '100%',
               width: '100%',
               items: [
                 {
-                  type: 'Image',
-                  source: '${payload.data.properties.backgroundImage}',
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  scale: 'best-fill'
+                  type: 'AlexaBackground',
+                  id: 'background',
+                  backgroundImageSource: '${payload.data.properties.backgroundImage}',
+                  opacity: 0
                 },
                 {
-                  type: 'Container',
-                  position: 'absolute',
+                  when: '${@viewportProfile != @hubRoundSmall}',
+                  type: 'AlexaHeader',
+                  id: 'header',
+                  headerTitle: 'SIZE',
+                  headerAttributionPrimacy: false,
+                  headerBackButton: true,
                   width: '100%',
-                  height: '100%',
-                  item: {
-                    type: 'AlexaHeader',
-                    headerTitle: 'SIZE',
-                    headerAttributionPrimacy: false,
-                    headerBackButton: 1,
-                    headerNavigationAction: 'backEvent'
-                  }
+                  opacity: 0
                 },
                 {
+                  when: '${@viewportProfile == @hubRoundSmall}',
+                  type: 'AlexaHeader',
+                  id: 'header',
+                  headerTitle: 'SIZE',
+                  headerAttributionPrimacy: false,
+                  headerBackButton: true,
+                  width: '100%',
+                  opacity: 0,
+                  position: 'absolute',
+                  left: 0
+                },
+                {
+                  when: '${@viewportProfile == @hubRoundSmall}',
                   type: 'Pager',
+                  grow: 1,
+                  height: '100%',
+                  width: '100%',
+                  onPageChanged: [
+                    {
+                      when: '${event.source.value == 0}',
+                      type: "Parallel",
+                      commands: [
+                        {
+                          type: 'SoftStaggerItemTargetted',
+                          order: 1,
+                          componentId: 'planetData1',
+                          fromDirection: "left"
+                        },
+                        {
+                          type: 'SoftStaggerItemTargetted',
+                          order: 2,
+                          componentId: 'planetData2',
+                          fromDirection: "left"
+                        },
+                        {
+                          type: 'SoftStaggerOutTargetted',
+                          componentId: 'planetGraphic1'
+                        },
+                        {
+                          type: 'SoftStaggerOutTargetted',
+                          componentId: 'planetGraphic2'
+                        }
+                      ]
+                    },
+                    {
+                      when: '${event.source.value == 1}',
+                      type: "Parallel",
+                      commands: [
+                        {
+                          type: 'SoftStaggerOutTargetted',
+                          componentId: 'planetData1'
+                        },
+                        {
+                          type: 'SoftStaggerOutTargetted',
+                          componentId: 'planetData2'
+                        },
+                        {
+                          type: 'SoftStaggerItemTargetted',
+                          order: 1,
+                          componentId: 'planetGraphic1',
+                          fromDirection: "right"
+                        },
+                        {
+                          type: 'SoftStaggerItemTargetted',
+                          order: 2,
+                          componentId: 'planetGraphic2',
+                          fromDirection: "right"
+                        }
+                      ]
+                    }
+                  ],
                   items: [
                     {
                       type: 'Container',
-                      direction: 'column',
-                      alignItems: 'center',
                       width: '100%',
                       height: '100%',
+                      direction: 'column',
+                      alignItems: 'start',
                       justifyContent: 'center',
                       items: [
                         {
                           type: 'PlanetSize',
+                          id: 'planetData1',
                           paddingTop: 20,
+                          paddingLeft: '@marginHorizontal',
                           planet: '${payload.data.properties.planets[0].label}',
                           color: '${payload.data.properties.planets[0].color}',
-                          diameter: '${payload.data.properties.planets[0].diameter}'
+                          diameter: '${payload.data.properties.planets[0].diameter}',
+                          opacity: 0
                         },
                         {
                           type: 'PlanetSize',
+                          id: 'planetData2',
                           paddingTop: 20,
+                          paddingLeft: '@marginHorizontal',
                           planet: '${payload.data.properties.planets[1].label}',
                           color: '${payload.data.properties.planets[1].color}',
-                          diameter: '${payload.data.properties.planets[1].diameter}'
+                          diameter: '${payload.data.properties.planets[1].diameter}',
+                          opacity: 0
                         }
                       ]
                     },
@@ -123,89 +348,78 @@ module.exports = (planet1, planet2, comparator) => {
                           items: [
                             {
                               type: 'Frame',
+                              id: 'planetGraphic1',
                               position: 'absolute',
                               width: '${payload.data.properties.planets[0].scale * 55}vh',
                               height: '${payload.data.properties.planets[0].scale * 55}vh',
                               backgroundColor: '${payload.data.properties.planets[0].color}',
-                              borderRadius: '1000'
+                              borderRadius: '1000',
+                              opacity: 0
                             },
                             {
                               type: 'Frame',
+                              id: 'planetGraphic2',
                               position: 'absolute',
                               width: '${payload.data.properties.planets[1].scale * 55}vh',
                               height: '${payload.data.properties.planets[1].scale * 55}vh',
                               backgroundColor: '${payload.data.properties.planets[1].color}',
-                              borderRadius: '1000'
+                              borderRadius: '1000',
+                              opacity: 0
                             }
                           ]
                         }
                       ]
                     }
                   ]
-                }
-              ]
-            },
-            {
-              when: '${@viewportProfile != @hubRoundSmall}',
-              type: 'Container',
-              direction: 'column',
-              height: '100%',
-              width: '100%',
-              items: [
-                {
-                  type: 'Image',
-                  source: '${payload.data.properties.backgroundImage}',
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  scale: 'best-fill'
                 },
                 {
-                  type: 'AlexaHeader',
-                  headerTitle: '${payload.data.properties.title}',
-                  headerBackButton: 1,
-                  headerNavigationAction: 'backEvent'
-                },
-                {
+                  when: '${@viewportProfile != @hubRoundSmall}',
                   type: 'Container',
                   grow: 1,
                   shrink: 1,
-                  paddingLeft: '@marginLeft',
-                  paddingRight: '@marginRight',
+                  paddingLeft: '@marginHorizontal',
+                  paddingRight: '@marginHorizontal',
                   direction: 'row',
                   align: 'center',
                   justifyContent: 'spaceBetween',
                   items: [
                     {
                       type: 'Container',
-                      width: '50%',
-                      paddingRight: '${@marginRight/2}',
+                      width: '${viewport.width < 1000 ? \'60%\' : \'50%\'}',
+                      paddingRight: '@spacingMedium',
                       justifyContent: 'spaceAround',
                       items: [
                         {
                           type: 'PlanetSize',
+                          id: 'planetData1',
                           planet: '${payload.data.properties.planets[0].label}',
                           color: '${payload.data.properties.planets[0].color}',
-                          diameter: '${payload.data.properties.planets[0].diameter}'
+                          diameter: '${payload.data.properties.planets[0].diameter}',
+                          opacity: 0
                         },
                         {
                           when: planet1 !== planet2,
                           type: 'PlanetSize',
+                          id: 'planetData2',
+                          paddingTop: '@spacingSmall',
                           planet: '${payload.data.properties.planets[1].label}',
                           color: '${payload.data.properties.planets[1].color}',
-                          diameter: '${payload.data.properties.planets[1].diameter}'
+                          diameter: '${payload.data.properties.planets[1].diameter}',
+                          opacity: 0
                         },
                         {
                           when: planet1 !== planet2,
                           type: 'Container',
+                          id: 'planetData3',
+                          paddingTop: '@spacingMedium',
                           items: [
                             {
                               when:
-                                '${(@viewportProfile == @hubLandscapeMedium && viewport.height > 600) || @viewportProfile != @hubLandscapeMedium}',
+                                '${viewport.height > 600 || @viewportProfile != @hubLandscapeMedium}',
                               type: 'Text',
                               text: '${payload.data.properties.comparisonString}',
-                              style:
-                                "${viewport.height <= 600 ? 'textStyleBody' : 'textStyleHeadline'}"
+                              style: 'textStyleTitle',
+                              opacity: 0
                             }
                           ]
                         }
@@ -213,7 +427,7 @@ module.exports = (planet1, planet2, comparator) => {
                     },
                     {
                       type: 'Container',
-                      width: '50%',
+                      width: '${viewport.width < 1000 ? \'40%\' : \'50%\'}',
                       height: '100%',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -230,24 +444,38 @@ module.exports = (planet1, planet2, comparator) => {
                           items: [
                             {
                               type: 'Frame',
+                              id: 'planetGraphic1',
                               position: 'absolute',
                               width:
                                 '${viewport.height <= 600 ? payload.data.properties.planets[0].scale * 53 : payload.data.properties.planets[0].scale * 65}vh',
                               height:
                                 '${viewport.height <= 600 ? payload.data.properties.planets[0].scale * 53 : payload.data.properties.planets[0].scale * 65}vh',
                               backgroundColor: '${payload.data.properties.planets[0].color}',
-                              borderRadius: '1000'
+                              borderRadius: 1000,
+                              opacity: 0,
+                              transform: [
+                                {
+                                  translateX: '50%'
+                                }
+                              ]
                             },
                             {
                               when: planet1 !== planet2,
                               type: 'Frame',
+                              id: 'planetGraphic2',
                               position: 'absolute',
                               width:
                                 '${viewport.height <= 600 ? payload.data.properties.planets[1].scale * 53 : payload.data.properties.planets[1].scale * 65}vh',
                               height:
                                 '${viewport.height <= 600 ? payload.data.properties.planets[1].scale * 53 : payload.data.properties.planets[1].scale * 65}vh',
                               backgroundColor: '${payload.data.properties.planets[1].color}',
-                              borderRadius: '1000'
+                              borderRadius: 1000,
+                              opacity: 0,
+                              transform: [
+                                {
+                                  translateX: '50%'
+                                }
+                              ]
                             }
                           ]
                         }
@@ -255,7 +483,12 @@ module.exports = (planet1, planet2, comparator) => {
                     }
                   ]
                 },
-                { type: 'AlexaFooter', hintText: '${payload.data.properties.hint}' }
+                {
+                  when: '${@viewportProfile != @hubRoundSmall}',
+                  type: 'AlexaFooter',
+                  id: 'footer',
+                  hintText: '${payload.data.properties.hint}'
+                }
               ]
             }
           ]
@@ -268,7 +501,7 @@ module.exports = (planet1, planet2, comparator) => {
         properties: {
           title: `${planet1.toUpperCase()} · SIZE`,
           hintText: 'how big is Saturn?',
-          backgroundImage: 'https://s3-us-west-2.amazonaws.com/ddg-skill/assets/bg_space.jpg',
+          backgroundImage: `${cdnPath}assets/bg_space.jpg`,
           comparisonString: `${capitalize(planet1)} is ${comparator} than ${capitalize(planet2)}`,
           planets: [
             {

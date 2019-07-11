@@ -21,16 +21,16 @@ module.exports = () => ({
   token: 'solar-system',
   document: {
     type: 'APL',
-    version: '1.0',
+    version: '1.1',
     theme: 'dark',
     import: [
       {
         name: 'alexa-styles',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'alexa-layouts',
-        version: '1.0.0-beta'
+        version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
       },
       {
         name: 'layouts',
@@ -43,14 +43,16 @@ module.exports = () => ({
         source: `${cdnPath}apl/styles.json`
       }
     ],
-    features: {
-      idleTimeout: 91000
-    },
     mainTemplate: {
       parameters: ['payload'],
       item: {
         type: 'Frame',
         backgroundColor: 'black',
+        onMount: [
+          {
+            type: 'SolarSystemReveal'
+          }
+        ],
         items: [
           {
             when: '${@viewportProfile == @hubRoundSmall}',
@@ -60,7 +62,8 @@ module.exports = () => ({
           {
             when: '${@viewportProfile != @hubRoundSmall}',
             type: 'SolarSystem',
-            data: '${payload.data.properties.data}'
+            data: '${payload.data.properties.data}',
+            hintText: '${payloaddata.properties.hint}'
           }
         ]
       }

@@ -31,6 +31,7 @@ module.exports = (planet, comp) => {
     comp.forEach(item => {
       elements.push({
         type: 'Element',
+        id: item.element.replace(/\s/g, '_'),
         element: item.element,
         title: item.element.toUpperCase(),
         notation: `\${payload.data.properties.elements['${item.element}'].notation}`,
@@ -41,10 +42,11 @@ module.exports = (planet, comp) => {
     });
   }
 
-  elements.forEach(item => {
+  elements.forEach((item, i) => {
     pagerItems.push({
       type: 'Container',
       alignItems: 'center',
+      id: `page_${i}`,
       justifyContent: 'center',
       width: '100%',
       height: '100%',
@@ -52,6 +54,7 @@ module.exports = (planet, comp) => {
       paddingRight: '6vw',
       paddingTop: 50,
       direction: 'row',
+      opacity: i === 0 ? 1 : 0,
       item
     });
   });
@@ -64,12 +67,12 @@ module.exports = (planet, comp) => {
       version: '1.0',
       import: [
         {
-          name: 'alexa-layouts',
-          version: '1.0.0-beta'
+          name: 'alexa-styles',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
-          name: 'alexa-styles',
-          version: '1.0.0-beta'
+          name: 'alexa-layouts',
+          version: '1.1.0-eifjccgiclfvkinnkcftdcdeklbrnlhchfcihjjdghdi'
         },
         {
           name: 'layouts',
@@ -80,44 +83,140 @@ module.exports = (planet, comp) => {
           name: 'styles',
           version: '1.0.0',
           source: `${cdnPath}apl/styles.json`
+        },
+        {
+          name: 'soft-stagger',
+          version: '1.0.0',
+          source: `${cdnPath}apl/soft-stagger.json`
+        },
+        {
+          name: 'atmosphere-graphics',
+          version: '1.0.0',
+          source: `${cdnPath}apl/atmosphere-graphics.json`
         }
       ],
-      features: {
-        idleTimeout: 60000
+      commands: {
+        onLoad: {
+          parameters: [],
+          command: {
+            type: 'Parallel',
+            delay: 250,
+            commands: [
+              ...elements.map((item, i) => {
+                return {
+                  type: 'SoftStaggerItemTargetted',
+                  componentId: item.id,
+                  order: i + 1,
+                  fromDirection: 'bottom'
+                }
+              }),
+              {
+                type: 'SoftStaggerItemTargetted',
+                componentId: 'compositionImage',
+                order: elements.length,
+                fromDirection: 'right'
+              },
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'background'
+              },
+              {
+                type: 'SoftStaggerBackgroundTargetted',
+                componentId: 'listContainer'
+              },
+              {
+                type: 'SoftStaggerChromeTargetted',
+                componentId: 'header',
+                fromDirection: 'bottom'
+              },
+              {
+                type: 'SoftStaggerHintTargetted',
+                componentId: 'footer',
+                fromDirection: 'bottom'
+              }
+            ]
+          }
+        }
       },
+      onMount: [
+        {
+          type: 'onLoad'
+        }
+      ],
       mainTemplate: {
         parameters: ['payload'],
         items: [
           {
-            when: '${@viewportProfile == @hubRoundSmall}',
             type: 'Container',
-            direction: 'column',
-            height: '100%',
             width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
             items: [
               {
-                type: 'Image',
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                scale: 'best-fill',
-                source: planetData.backgroundImage
+                type: 'AlexaBackground',
+                id: 'background',
+                backgroundImageSource: planetData.backgroundImage,
+                backgroundScale: 'best-fill',
+                opacity: 0
               },
               {
-                type: 'Container',
-                position: 'absolute',
+                when: '${@viewportProfile != @hubRoundSmall}',
+                type: 'AlexaHeader',
+                id: 'header',
+                headerTitle: `${planet.toUpperCase()} · ATMOSPHERE`,
+                headerBackButton: true,
                 width: '100%',
-                height: '100%',
-                item: {
-                  type: 'AlexaHeader',
-                  headerTitle: 'ATMOSPHERE',
-                  headerAttributionPrimacy: false
-                }
+                opacity: 0
               },
               {
+                when: '${@viewportProfile == @hubRoundSmall}',
+                type: 'AlexaHeader',
+                id: 'header',
+                headerTitle: `${planet.toUpperCase()} · ATMOSPHERE`,
+                headerBackButton: true,
+                headerAttributionPrimacy: false,
+                width: '100%',
+                opacity: 0,
+                position: 'absolute',
+                top: 0,
+                left: 0
+              },
+              {
+                when: '${@viewportProfile == @hubRoundSmall}',
                 type: 'Pager',
+                id: 'pager',
                 width: '100%',
                 height: '100%',
+                bind: [
+                  {
+                    name: 'currentPage',
+                    value: 0
+                  }
+                ],
+                onPageChanged: [
+                  {
+                    type: 'Parallel',
+                    commands: [
+                      {
+                        type: 'SoftStaggerItemTargetted',
+                        componentId: '${\'page_\' + event.source.value}',
+                        order: 2,
+                        fromDirection: '${event.source.value < currentPage ? \'left\' : \'right\'}'
+                      },
+                      {
+                        type: 'SoftStaggerOutTargetted',
+                        componentId: '${\'page_\' + currentPage}'
+                      }
+                    ]
+                  },
+                  {
+                    type: 'SetValue',
+                    componentId: 'pager',
+                    property: 'currentPage',
+                    value: '${event.source.value}'
+                  }
+                ],
                 items: [
                   ...pagerItems,
                   {
@@ -135,68 +234,14 @@ module.exports = (planet, comp) => {
                     }
                   }
                 ]
-              }
-            ]
-          },
-          {
-            when: '${@viewportProfile != @hubRoundSmall}',
-            type: 'Container',
-            width: '100%',
-            height: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            items: [
-              {
-                type: 'Image',
-                position: 'absolute',
-                width: '100vw',
-                height: '100vh',
-                scale: 'best-fill',
-                source: planetData.backgroundImage
-              },
-              {
-                type: 'Container',
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                left: 0,
-                items: [
-                  {
-                    type: 'AlexaHeader',
-                    headerTitle: `${planet.toUpperCase()} · ATMOSPHERE`,
-                    headerBackButton: 1,
-                    headerNavigationAction: 'backEvent'
-                  }
-                ]
-              },
-              {
-                when: '${@viewportProfile != @tvLandscapeXLarge}',
-                type: 'Container',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-                height: '70%',
-                paddingLeft: '6vw',
-                paddingRight: '6vw',
-                direction: 'row',
-                items: [
-                  ...elements,
-                  {
-                    when: elements.length === 0,
-                    type: 'Text',
-                    style: 'textStyleDisplay3',
-                    textAlign: 'center',
-                    text: `${capitalize(planet)} has no atmosphere`
-                  }
-                ]
               },
               {
                 when: '${@viewportProfile == @tvLandscapeXLarge}',
                 type: 'Container',
                 width: '100%',
                 height: '70%',
-                paddingLeft: '@marginLeft',
-                paddingRight: '@marginRight',
+                paddingLeft: '@marginHorizontal',
+                paddingRight: '@marginHorizontal',
                 direction: 'row',
                 justifyContent: 'spaceBetween',
                 alignItems: 'start',
@@ -204,10 +249,12 @@ module.exports = (planet, comp) => {
                   {
                     when: elements.length !== 0,
                     type: 'Container',
+                    id: 'listContainer',
                     width: '50%',
                     height: '100%',
                     direction: 'column',
                     spacing: '@spacingLarge',
+                    opacity: 0,
                     items: [
                       {
                         type: 'Sequence',
@@ -220,16 +267,18 @@ module.exports = (planet, comp) => {
                   {
                     when: elements.length !== 0,
                     type: 'Container',
+                    id: 'compositionImage',
                     width: '40%',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    opacity: 0,
                     items: [
                       {
-                        type: 'Image',
+                        type: 'VectorGraphic',
                         width: '100%',
                         height: '100%',
                         scale: 'best-fit',
-                        source: planetData[planet].atmosphereImage
+                        source: `${planet}_atmosphere`
                       }
                     ]
                   },
@@ -252,17 +301,32 @@ module.exports = (planet, comp) => {
                 ]
               },
               {
+                when: '${@viewportProfile != @tvLandscapeXLarge && @viewportProfile != @hubRoundSmall}',
                 type: 'Container',
-                position: 'absolute',
-                bottom: 0,
-                right: 0,
-                left: 0,
+                alignItems: 'center',
+                justifyContent: 'spaceAround',
+                width: '100%',
+                grow: 1,
+                paddingLeft: '@marginHorizontal',
+                paddingRight: '@marginHorizontal',
+                direction: 'row',
                 items: [
+                  ...elements,
                   {
-                    type: 'AlexaFooter',
-                    hintText: '${payload.data.properties.hint}'
+                    when: elements.length === 0,
+                    type: 'Text',
+                    style: 'textStyleDisplay3',
+                    textAlign: 'center',
+                    text: `${capitalize(planet)} has no atmosphere`
                   }
                 ]
+              },
+              {
+                when: '${@viewportProfile != @hubRoundSmall}',
+                type: 'AlexaFooter',
+                id: 'footer',
+                opacity: 0,
+                hintText: '${payload.data.properties.hint}'
               }
             ]
           }

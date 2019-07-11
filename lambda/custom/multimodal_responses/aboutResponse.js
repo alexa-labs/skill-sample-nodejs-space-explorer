@@ -41,15 +41,20 @@ module.exports = (handlerInput, planet, speak = true) => {
         token: 'transcript_document',
         commands: [
           {
-            type: 'SpeakItem',
-            componentId: speak ? 'imageText' : 'doNothing',
-            highlightMode: 'line',
-            align: 'center'
-          },
-          {
-            type: 'Scroll',
-            componentId: 'scrollContainer',
-            distance: -10000
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SpeakItem',
+                componentId: speak ? 'karaokeText' : 'doNothing',
+                highlightMode: 'line',
+                align: 'center'
+              },
+              {
+                type: 'Scroll',
+                componentId: 'scrollContainer',
+                distance: -10000
+              }
+            ]
           }
         ]
       })
