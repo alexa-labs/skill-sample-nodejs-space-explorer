@@ -20,7 +20,7 @@ module.exports = (resource, title = null) => ({
   token: 'transcript_document',
   document: {
     type: 'APL',
-    version: '1.0',
+    version: '1.1',
     theme: 'dark',
     import: [
       {
@@ -47,12 +47,15 @@ module.exports = (resource, title = null) => ({
         extends: 'textStyleKaraoke',
         values: [
           {
-            when: '${state.karaokeTarget}',
-            opacity: 1
+            color: '@colorText'
           },
           {
-            when: '${state.karaoke}',
-            opacity: '@opacityDisabled'
+            "when": "${state.karaoke}",
+            "color": "rgba(218,218,218,0.5)"
+          },
+          {
+            "when": "${state.karaokeTarget}",
+            "color": "rgba(218,218,218,1)"
           }
         ]
       }
@@ -111,20 +114,20 @@ module.exports = (resource, title = null) => ({
                   height: '100vh',
                   backgroundColor: 'black',
                   opacity: 0
+                },
+                {
+                  type: 'Image',
+                  position: 'absolute',
+                  scale: 'best-fill',
+                  width: '100vw',
+                  height: '100vh',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  source: 'https://d1od0khoye9qi3.cloudfront.net/image_scrim.png'
                 }
               ]
-            },
-            {
-              type: 'Image',
-              position: 'absolute',
-              scale: 'best-fill',
-              width: '100vw',
-              height: '100vh',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              source: 'https://d1od0khoye9qi3.cloudfront.net/image_scrim.png'
             },
             {
               type: 'ScrollView',
@@ -153,40 +156,35 @@ module.exports = (resource, title = null) => ({
               items: [
                 {
                   type: 'Container',
-                  items: [
+                  paddingTop: '${viewport.height >= 600 ? \'75vh\' : \'65vh\'}',
+                  paddingLeft: '@marginHorizontal',
+                  paddingRight: '@marginHorizontal',
+                  paddingBottom: 150,
+                  width: '100%',
+                  backgroundColor: 'black',
+                  alignItems: "${@viewportProfile == @hubRoundSmall ? 'center' : 'start'}",
+                  inheritParentState: true,
+                  item: [
                     {
-                      type: 'Container',
-                      paddingTop: '${viewport.height >= 600 ? \'75vh\' : \'65vh\'}',
-                      paddingLeft: '@marginHorizontal',
-                      paddingRight: '@marginHorizontal',
-                      paddingBottom: 150,
-                      width: '100%',
-                      backgroundColor: 'black',
-                      alignItems: "${@viewportProfile == @hubRoundSmall ? 'center' : 'start'}",
-                      item: [
-                        {
-                          type: 'Text',
-                          style: 'textStyleBodyAlt',
-                          spacing: resource.source ? '10dp' : 0,
-                          text: resource.title
-                        },
-                        {
-                          when: resource.source !== undefined,
-                          type: 'Text',
-                          style: 'textStyleCallout',
-                          paddingBottom: '26dp',
-                          text: `${resource.video !== null ? 'Video' : 'Image'}: ${resource.source}`
-                        },
-                        {
-                          type: 'Text',
-                          style: 'karaokeStyle',
-                          highlightMode: 'line',
-                          spacing: resource.source ? '26dp' : '60dp',
-                          text: '${payload.resource.properties.text}',
-                          id: 'karaokeText',
-                          speech: '${payload.resource.properties.speech}'
-                        }
-                      ]
+                      type: 'Text',
+                      style: 'textStyleBodyAlt',
+                      spacing: resource.source ? '10dp' : 0,
+                      text: resource.title
+                    },
+                    {
+                      when: resource.source !== undefined,
+                      type: 'Text',
+                      style: 'textStyleCallout',
+                      paddingBottom: '26dp',
+                      text: `${resource.video !== null ? 'Video' : 'Image'}: ${resource.source}`
+                    },
+                    {
+                      type: 'Text',
+                      id: 'karaokeText',
+                      style: 'karaokeStyle',
+                      spacing: resource.source ? '26dp' : '60dp',
+                      text: '${payload.resource.properties.text}',
+                      speech: '${payload.resource.properties.speech}'
                     }
                   ]
                 }

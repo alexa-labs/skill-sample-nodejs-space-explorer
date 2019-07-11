@@ -2,8 +2,5 @@
 .eslintrc.json
 .prettierrc
 *.zip
-packages/alexa-layouts-beta.json
-packages/alexa-style-beta-test.json
 node_modules
 package-lock.json
-packages

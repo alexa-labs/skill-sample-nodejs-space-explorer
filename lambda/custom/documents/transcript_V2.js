@@ -20,7 +20,7 @@ module.exports = (resource, title = null) => ({
   token: 'transcript_document',
   document: {
     type: 'APL',
-    version: '1.0',
+    version: '1.1',
     theme: 'dark',
     import: [
       {

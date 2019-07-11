@@ -6,7 +6,7 @@ Alexa Presentation Language (APL) gives developers the ability to create rich, e
 
 ## APL 1.1 Release Updates
 
-A number of new features and offerings have allowed us to expand on the Space Explorer experience. Some of the things leveraged in this update include:
+With the release of APL 1.1, Space Explorer has been updated to demonstrate a number of new features, including:
 
 - Video
 - Animations
