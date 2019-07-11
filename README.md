@@ -13,7 +13,13 @@ With the release of APL 1.1, Space Explorer has been updated to demonstrate a nu
 - Alexa Vector Graphics (AVG)
 - Alexa Responsive Layouts
 
-Additionally, we've created a new animation package that allows us to reuse the same animation framework across all our pages. This drastically reduces the amount of code we need to write, allows us to paramaterize our custom animations and maintain a consitent feel across the skill. Take a look at [soft-stagger.json](packages/soft-stagger.json) for the code behind how we achieved this.
+### Animations
+
+We've created a new animation package that allows us to reuse the same animation framework across all our pages. This drastically reduces the amount of code we need to write, allows us to paramaterize our custom animations and maintain a consitent feel across the skill. Take a look at [soft-stagger.json](packages/soft-stagger.json) for the code behind how we achieved this.
+
+### AVG
+
+Because of the dynamic nature of APL responses, we created a graphics package to serve vector graphics for our atmosphere data on larger screens. Check out [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
 
 ### Alexa Responsive Layouts
 
