@@ -4,7 +4,11 @@
 
 ## Overview
 
-The splash screen is displayed when first opening the skill. It is intended to mask the loading of the solar system images. With the release of APL 1.1, we were able to implement a solution that uses the video ending to trigger an opacity transition that reveals the solar system.
+The splash screen is displayed when first opening the skill. It is intended to mask the loading of the solar system images. 
+
+### Updates
+
+The initial `ScrollView` implementation was replaced with a solution that uses the video ending to trigger an opacity transition that reveals the solar system.
 
 ### Layout Notes
 

@@ -278,7 +278,7 @@ module.exports = (planet, comp) => {
                         width: '100%',
                         height: '100%',
                         scale: 'best-fit',
-                        source: `${planet}_atmo`
+                        source: `${planet}_atmosphere`
                       }
                     ]
                   },

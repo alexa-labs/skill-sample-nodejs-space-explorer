@@ -15,15 +15,15 @@ With the release of APL 1.1, Space Explorer has been updated to demonstrate a nu
 
 ### Animations
 
-We've created a new animation package that allows us to reuse the same animation framework across all our pages. This drastically reduces the amount of code we need to write, allows us to paramaterize our custom animations and maintain a consitent feel across the skill. Take a look at [soft-stagger.json](packages/soft-stagger.json) for the code behind how we achieved this.
+A new animation package has been created to facilitate reuse of the same animation framework across all pages. This drastically reduces the amount of code written, allows parameterization of custom animations, and maintains a consistent feel across the skill. See [soft-stagger.json](packages/soft-stagger.json) for the code behind how this was achieved.
 
 ### AVG
 
-Because of the dynamic nature of APL responses, we created a graphics package to serve vector graphics for our atmosphere data on larger screens. Check out [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
+Because of the dynamic nature of APL responses, a graphics package was built to serve vector graphics for the atmosphere data on larger screens. See [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
 
 ### Alexa Responsive Layouts
 
-One of the biggest time-savers for us was the inclusion of the Alexa Responsive Layouts. These are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these in our code let us eliminate several lines of code and conditional statements throughout the skill. It also alleviates the nedd to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
+Alexa Responsive Layouts are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these eliminates several lines of code and conditional statements throughout the skill. It also alleviates the need to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
 
 ## Quicklinks
 

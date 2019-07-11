@@ -7,6 +7,7 @@
 Each time a user navigates to a planet, we display a Planet Details view that guides the user to a short list of supported detail types. The purpose of this is two-fold; while you can design experiences to be more open-ended, we purposefully defined Overview, Size, Distance, Atmosphere, and Moons so we could show what a framed experience looks like and to inform the user what they can ask readily. Each page consists of a vertical list of `TouchWrappers` with ordinals, `Images` and some conditional `Text` callouts. `Text` components make use of the text styles found in the alexa-styles package to properly size, color and weight the text for optimal visibility across devices.
 
 ### Updates
+
 Staggered animations were added that uses the document's `onMount` field to trigger when the page loads.
 
 ### Layout Notes

@@ -2,7 +2,7 @@
     "type": "APL",
     "version": "1.1",
     "graphics": {
-        "venus_atmo": {
+        "venus_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -20,7 +20,7 @@
                 }
             ]
         },
-        "earth_atmo": {
+        "earth_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -48,7 +48,7 @@
                 }
             ]
         },
-        "mars_atmo": {
+        "mars_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -76,7 +76,7 @@
                 }
             ]
         },
-        "jupiter_atmo": {
+        "jupiter_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -99,7 +99,7 @@
                 }
             ]
         },
-        "saturn_atmo": {
+        "saturn_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -122,7 +122,7 @@
                 }
             ]
         },
-        "uranus_atmo": {
+        "uranus_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -145,7 +145,7 @@
                 }
             ]
         },
-        "neptune_atmo": {
+        "neptune_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
@@ -168,7 +168,7 @@
                 }
             ]
         },
-        "pluto_atmo": {
+        "pluto_atmosphere": {
             "type": "AVG",
             "version": "1.0",
             "width": 480,
