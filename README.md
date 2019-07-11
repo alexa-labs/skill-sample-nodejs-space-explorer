@@ -6,7 +6,7 @@ Alexa Presentation Language (APL) gives developers the ability to create rich, e
 
 ## APL 1.1 Release Updates
 
-With the release of APL 1.1, Space Explorer has been updated to demonstrate a number of new features, including:
+With the release of APL 1.1, Space Explorer includes updates to demonstrate new features, including:
 
 - Video
 - Animations
@@ -15,15 +15,15 @@ With the release of APL 1.1, Space Explorer has been updated to demonstrate a nu
 
 ### Animations
 
-A new animation package has been created to facilitate reuse of the same animation framework across all pages. This drastically reduces the amount of code written, allows parameterization of custom animations, and maintains a consistent feel across the skill. See [soft-stagger.json](packages/soft-stagger.json) for the code behind how this was achieved.
+The new animation package allows you to apply the same animation framework across all pages. This drastically reduces the amount of code written, allows parameterization of custom animations, and maintains a consistent feel across the skill. See [soft-stagger.json](packages/soft-stagger.json) for the code behind how this is achieved.
 
 ### AVG
 
-Because of the dynamic nature of APL responses, a graphics package was built to serve vector graphics for the atmosphere data on larger screens. See [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
+Because of the dynamic nature of APL responses, vector graphics for the atmosphere data on larger screens are served with a new graphics package. See [atmosphere-graphics.json](packages/atmosphere-graphics.json) for an example of an AVG package.
 
 ### Alexa Responsive Layouts
 
-Alexa Responsive Layouts are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these eliminates several lines of code and conditional statements throughout the skill. It also alleviates the need to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
+Alexa Responsive Layouts are pre-made layouts built by Amazon to work across all device categories and viewport sizes. Including these simplifies the code and conditional statements throughout the skill. It also alleviates the need to update the skill every time a new device comes online. Visit the Alexa Design Guide's [Responsive Components](https://developer.amazon.com/docs/alexa-design/background.html) section for more information and usage.
 
 ## Quicklinks
 
@@ -86,7 +86,7 @@ Once you've arrived at a planet, you can learn more about it by saying:
 
 ### Astronomy Pictures
 
-You can view a random image from the Astronomy Picture of the Day archives by saying:
+You can view a random image from NASA's Astronomy Picture of the Day archives by saying:
 
 - _Alexa, show me a random image._
 - _Alexa, show me a space image._
